@@ -55,17 +55,19 @@ const AdminPanel = () => {
     setMobileMenuOpen(false);
   };
 
-  // ── Login Screen ──────────────────────────────────────────────
+  // ── Login Screen ──────────────────────────────────────
   if (!token) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
           <div className="text-center mb-6">
-            <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <Settings size={28} className="text-blue-600" />
-            </div>
+            <img
+              src="/godawari_logo.png"
+              alt="Godawari Fish & Company"
+              className="h-20 w-auto mx-auto mb-3 drop-shadow"
+            />
             <h1 className="text-2xl font-bold text-gray-800">Admin Login</h1>
-            <p className="text-gray-500 text-sm mt-1">Godavari Fish Panel</p>
+            <p className="text-gray-500 text-sm mt-1">Godawari Fish & Company</p>
           </div>
 
           {loginError && (
@@ -110,7 +112,7 @@ const AdminPanel = () => {
     );
   }
 
-  // ── Dashboard ─────────────────────────────────────────────────
+  // ── Dashboard ─────────────────────────────────────────
   const ActiveIcon = TABS.find((t) => t.id === activeTab)?.icon || Package;
 
   return (
@@ -119,7 +121,6 @@ const AdminPanel = () => {
       <header className="bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* Mobile hamburger */}
             <button
               className="sm:hidden p-1.5 rounded-lg hover:bg-white/10 transition"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,9 +128,12 @@ const AdminPanel = () => {
             >
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
-            <div>
-              <h1 className="text-lg font-bold leading-tight">Godavari Fish</h1>
-              <p className="text-blue-200 text-xs hidden sm:block">Admin Panel</p>
+            <div className="flex items-center gap-2">
+              <img src="/godawari_logo.png" alt="" className="h-9 w-auto" />
+              <div>
+                <h1 className="text-base font-bold leading-tight">Godawari Fish & Company</h1>
+                <p className="text-blue-200 text-xs hidden sm:block">Admin Panel</p>
+              </div>
             </div>
           </div>
 
@@ -140,9 +144,7 @@ const AdminPanel = () => {
                 key={id}
                 onClick={() => handleTabChange(id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition ${
-                  activeTab === id
-                    ? 'bg-white text-blue-700'
-                    : 'text-blue-100 hover:bg-white/10'
+                  activeTab === id ? 'bg-white text-blue-700' : 'text-blue-100 hover:bg-white/10'
                 }`}
               >
                 <Icon size={15} />
@@ -168,9 +170,7 @@ const AdminPanel = () => {
                 key={id}
                 onClick={() => handleTabChange(id)}
                 className={`w-full flex items-center gap-3 px-5 py-3 text-sm font-semibold transition ${
-                  activeTab === id
-                    ? 'bg-white/10 text-white'
-                    : 'text-blue-200 hover:bg-white/5'
+                  activeTab === id ? 'bg-white/10 text-white' : 'text-blue-200 hover:bg-white/5'
                 }`}
               >
                 <Icon size={18} />
@@ -183,7 +183,6 @@ const AdminPanel = () => {
 
       {/* Page content */}
       <main className="max-w-7xl mx-auto px-3 sm:px-6 py-5 sm:py-8">
-        {/* Breadcrumb / current tab label (mobile) */}
         <div className="sm:hidden flex items-center gap-2 text-gray-500 text-sm mb-4">
           <ActiveIcon size={16} />
           <span className="font-semibold text-gray-700 capitalize">{activeTab}</span>

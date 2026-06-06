@@ -1,12 +1,10 @@
 import React from 'react';
-import { Fish } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const Footer = () => {
   const businessHours = {
-    weekdays: '6:00 AM - 9:00 PM',
-    saturday: '6:00 AM - 10:00 PM',
-    sunday: '7:00 AM - 9:00 PM',
+    weekdays: '9:00 AM – 9:00 PM',
+    weekends: '8:00 AM – 10:00 PM',
   };
 
   return (
@@ -25,56 +23,70 @@ const Footer = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+          {/* Brand */}
           <ScrollReveal>
-            <div className="flex items-center gap-2 mb-4">
-              <Fish size={24} className="text-cyan-400 animate-float" />
-              <h3 className="text-white font-extrabold text-xl">
-                Godavari <span className="text-cyan-400">Fish</span>
-              </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="/godawari_logo.png"
+                alt="Godawari Fish & Company"
+                className="h-14 w-auto drop-shadow-lg"
+              />
+              <div className="flex flex-col leading-tight">
+                <span className="text-white font-extrabold text-lg">Godawari Fish</span>
+                <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">& Company</span>
+              </div>
             </div>
-            <p className="text-sm mb-2">Fresh, Premium Quality Seafood</p>
-            <p className="text-sm">Central Naka, Near MGM Hospital</p>
+            <p className="text-sm mb-1 italic text-cyan-300">"The Real Taste of Fresh Fish"</p>
+            <p className="text-sm mt-2">Central Naka, Near MGM Hospital</p>
             <p className="text-sm">Chhatrapati Sambhaji Nagar, Maharashtra</p>
           </ScrollReveal>
 
+          {/* Contact */}
           <ScrollReveal delay={100}>
             <h3 className="text-white font-bold mb-4 gradient-text inline-block">Contact</h3>
             <p className="text-sm mb-2">
               <strong>Phone:</strong>
-              <a href="tel:9371306189" className="hover:text-cyan-400 transition">
-                {' '}
-                9371306189
-              </a>
+              <a href="tel:9371306189" className="hover:text-cyan-400 transition"> 9371306189</a>
+            </p>
+            <p className="text-sm mb-2">
+              <strong>WhatsApp:</strong>
+              <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition"> Chat Now</a>
             </p>
             <p className="text-sm">
               <strong>Email:</strong>
-              <a href="mailto:godawarifish189@gmail.com" className="hover:text-cyan-400 transition">
-                {' '}
-                godawarifish189@gmail.com
-              </a>
+              <a href="mailto:godawarifish189@gmail.com" className="hover:text-cyan-400 transition"> godawarifish189@gmail.com</a>
             </p>
           </ScrollReveal>
 
+          {/* Business Hours */}
           <ScrollReveal delay={200}>
-            <h3 className="text-white font-bold mb-4 gradient-text inline-block">
-              Business Hours
-            </h3>
-            <p className="text-sm mb-1">
-              <strong>Weekdays:</strong> {businessHours.weekdays}
-            </p>
-            <p className="text-sm mb-1">
-              <strong>Saturday:</strong> {businessHours.saturday}
-            </p>
-            <p className="text-sm">
-              <strong>Sunday:</strong> {businessHours.sunday}
-            </p>
+            <h3 className="text-white font-bold mb-4 gradient-text inline-block">Business Hours</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <div>
+                  <p className="font-semibold text-white">Weekdays (Mon–Fri)</p>
+                  <p>{businessHours.weekdays}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mt-2">
+                <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
+                <div>
+                  <p className="font-semibold text-white">Weekends (Sat–Sun)</p>
+                  <p>{businessHours.weekends}</p>
+                </div>
+              </div>
+            </div>
           </ScrollReveal>
 
+          {/* Quick Links */}
           <ScrollReveal delay={300}>
             <h3 className="text-white font-bold mb-4 gradient-text inline-block">Quick Links</h3>
             <ul className="text-sm space-y-2">
               {[
                 { href: '/', label: 'Home' },
+                { href: '/shop', label: '🛒 Shop' },
                 { href: '/about', label: 'About Us' },
                 { href: '/rates', label: 'Daily Rates' },
                 { href: '/contact', label: 'Contact' },
@@ -94,8 +106,8 @@ const Footer = () => {
 
         <div className="border-t border-gray-700/50 mt-10 pt-6 text-center text-sm">
           <p className="text-gray-400">
-            © 2024{' '}
-            <span className="text-cyan-400 font-semibold">Godavari Fish</span>. All
+            © 2025{' '}
+            <span className="text-cyan-400 font-semibold">Godawari Fish & Company</span>. All
             rights reserved. | Owner:{' '}
             <span className="text-white">Sameer Qureshi & Brothers</span>
           </p>

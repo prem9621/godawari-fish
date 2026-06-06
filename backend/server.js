@@ -19,9 +19,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: function(origin, callback) {
     const allowed = [
-      process.env.FRONTEND_URL,
-      'http://localhost:5173',
-    ];
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5175',
+];
     if (!origin || allowed.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
@@ -180,11 +182,6 @@ app.get('/api/rates', (req, res) => {
   });
 });
 
-/**
- * Returns one row per product with its latest rate (today's if present,
- * otherwise the most recent). Includes weight + weight_unit so the buying
- * view can show "12 kg available" + rate.
- */
 app.get('/api/products-with-rates', (req, res) => {
   const sql = `
     SELECT p.id AS product_id, p.name, p.description, p.image_url,
@@ -218,16 +215,12 @@ app.get('/api/rates/history/:productId', (req, res) => {
 });
 
 app.post('/api/rates', verifyToken, (req, res) => {
-  const {
-    product_id, rate, unit, availability,
-    weight, weight_unit,
-  } = req.body;
+  const { product_id, rate, unit, availability, weight, weight_unit } = req.body;
 
   if (!product_id || !rate) {
     return res.status(400).json({ error: 'Product ID and rate required' });
   }
 
-  // Delete existing rate for today first
   db.run(
     'DELETE FROM rates WHERE product_id = ? AND date = CURRENT_DATE',
     [product_id],
@@ -236,23 +229,18 @@ app.post('/api/rates', verifyToken, (req, res) => {
 
       const hasWeight = weight !== undefined && weight !== null && weight !== '';
       db.run(
-        `INSERT INTO rates
-           (product_id, rate, unit, availability, weight, weight_unit)
+        `INSERT INTO rates (product_id, rate, unit, availability, weight, weight_unit)
          VALUES (?, ?, ?, ?, ?, ?)`,
         [
-          product_id,
-          rate,
-          unit || 'kg',
+          product_id, rate, unit || 'kg',
           availability || 'Available',
           hasWeight ? Number(weight) : null,
           weight_unit || 'kg',
         ],
-        function (err) {
+        function(err) {
           if (err) return res.status(500).json({ error: 'Database error' });
           res.status(201).json({
-            id: this.lastID,
-            product_id,
-            rate,
+            id: this.lastID, product_id, rate,
             unit: unit || 'kg',
             availability: availability || 'Available',
             weight: hasWeight ? Number(weight) : null,
@@ -275,25 +263,17 @@ app.put('/api/rates/:id', verifyToken, (req, res) => {
   const hasWeight = weight !== undefined && weight !== null && weight !== '';
 
   db.run(
-    `UPDATE rates
-       SET rate = ?,
-           availability = ?,
-           weight = ?,
-           weight_unit = ?,
-           updated_at = CURRENT_TIMESTAMP
-     WHERE id = ?`,
+    `UPDATE rates SET rate = ?, availability = ?, weight = ?, weight_unit = ?,
+     updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
     [
-      rate,
-      availability || 'Available',
+      rate, availability || 'Available',
       hasWeight ? Number(weight) : null,
-      weight_unit || 'kg',
-      id,
+      weight_unit || 'kg', id,
     ],
     (err) => {
       if (err) return res.status(500).json({ error: 'Database error' });
       res.json({
-        id,
-        rate,
+        id, rate,
         availability: availability || 'Available',
         weight: hasWeight ? Number(weight) : null,
         weight_unit: weight_unit || 'kg',
@@ -325,12 +305,7 @@ app.post('/api/reviews', (req, res) => {
     [customer_name, rating || 5, review_text],
     function(err) {
       if (err) return res.status(500).json({ error: 'Database error' });
-      res.status(201).json({ 
-        id: this.lastID, 
-        customer_name, 
-        rating: rating || 5, 
-        review_text 
-      });
+      res.status(201).json({ id: this.lastID, customer_name, rating: rating || 5, review_text });
     }
   );
 });
@@ -349,14 +324,10 @@ app.put('/api/reviews/:id', verifyToken, (req, res) => {
   const { id } = req.params;
   const { visible } = req.body;
 
-  db.run(
-    'UPDATE reviews SET visible = ? WHERE id = ?',
-    [visible, id],
-    (err) => {
-      if (err) return res.status(500).json({ error: 'Database error' });
-      res.json({ id, visible });
-    }
-  );
+  db.run('UPDATE reviews SET visible = ? WHERE id = ?', [visible, id], (err) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    res.json({ id, visible });
+  });
 });
 
 // ============ INQUIRIES ROUTES ============
@@ -378,27 +349,20 @@ app.post('/api/inquiries', (req, res) => {
 });
 
 app.get('/api/inquiries', verifyToken, (req, res) => {
-  db.all(
-    'SELECT * FROM inquiries ORDER BY created_at DESC',
-    (err, inquiries) => {
-      if (err) return res.status(500).json({ error: 'Database error' });
-      res.json(inquiries);
-    }
-  );
+  db.all('SELECT * FROM inquiries ORDER BY created_at DESC', (err, inquiries) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    res.json(inquiries);
+  });
 });
 
 app.put('/api/inquiries/:id', verifyToken, (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
-  db.run(
-    'UPDATE inquiries SET status = ? WHERE id = ?',
-    [status, id],
-    (err) => {
-      if (err) return res.status(500).json({ error: 'Database error' });
-      res.json({ id, status });
-    }
-  );
+  db.run('UPDATE inquiries SET status = ? WHERE id = ?', [status, id], (err) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    res.json({ id, status });
+  });
 });
 
 // ============ CONTACT REQUESTS ROUTES ============
@@ -420,13 +384,10 @@ app.post('/api/contact', (req, res) => {
 });
 
 // ============ SITE SETTINGS ============
-// Public read — used by the About page (and any other public surface
-// that wants to render the editable owner profile / business story).
 app.get('/api/settings', (req, res) => {
   db.get('SELECT * FROM site_settings WHERE id = 1', (err, row) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     if (!row) {
-      // Defensive fallback if the seed didn't run for some reason
       return res.json({
         owner_name: 'Sameer Qureshi',
         owner_role: 'Owner · Sameer Qureshi & Brothers',
@@ -439,13 +400,9 @@ app.get('/api/settings', (req, res) => {
   });
 });
 
-// Admin write — multipart so the owner image can be uploaded alongside
-// the other text fields. Reuses the global `upload` multer config.
 app.put('/api/settings', verifyToken, upload.single('owner_image'), (req, res) => {
   const { owner_name, owner_role, owner_bio, business_story } = req.body;
 
-  // Read the current row first so we can preserve owner_image_url when no
-  // new file is uploaded.
   db.get('SELECT * FROM site_settings WHERE id = 1', (err, current) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     if (!current) return res.status(404).json({ error: 'Settings row not found' });
@@ -454,11 +411,8 @@ app.put('/api/settings', verifyToken, upload.single('owner_image'), (req, res) =
 
     db.run(
       `UPDATE site_settings
-         SET owner_name = ?,
-             owner_role = ?,
-             owner_bio = ?,
-             owner_image_url = ?,
-             business_story = ?,
+         SET owner_name = ?, owner_role = ?, owner_bio = ?,
+             owner_image_url = ?, business_story = ?,
              updated_at = CURRENT_TIMESTAMP
        WHERE id = 1`,
       [
@@ -477,6 +431,43 @@ app.put('/api/settings', verifyToken, upload.single('owner_image'), (req, res) =
       }
     );
   });
+});
+
+// ============ FISH SEO ROUTE ============
+app.get('/api/fish/:name', (req, res) => {
+  const fishName = decodeURIComponent(req.params.name);
+
+  db.get(
+    `SELECT p.*, r.rate, r.unit, r.availability, r.weight, r.weight_unit
+     FROM products p
+     LEFT JOIN rates r ON r.id = (
+       SELECT id FROM rates WHERE product_id = p.id ORDER BY date DESC LIMIT 1
+     )
+     WHERE LOWER(p.name) LIKE LOWER(?)`,
+    [`%${fishName}%`],
+    (err, product) => {
+      if (err) return res.status(500).json({ error: 'Database error' });
+
+      res.json({
+        name: product?.name || fishName,
+        description: product?.description || `Fresh ${fishName} available at Godawari Fish & Company, Chhatrapati Sambhaji Nagar.`,
+        rate: product?.rate || null,
+        unit: product?.unit || 'kg',
+        availability: product?.availability || 'Available',
+        shop: {
+          name: 'Godawari Fish & Company',
+          address: 'Central Naka, Near MGM Hospital, Chhatrapati Sambhaji Nagar',
+          phone: '9371306189',
+          whatsapp: 'https://wa.me/919371306189',
+          maps: 'https://share.google/2MtIQfCr7kSC1STPs',
+          hours: {
+            weekdays: '9:00 AM - 9:00 PM',
+            weekends: '8:00 AM - 10:00 PM',
+          },
+        },
+      });
+    }
+  );
 });
 
 // ============ HEALTH CHECK ============

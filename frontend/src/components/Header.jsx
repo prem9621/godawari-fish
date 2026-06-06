@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Fish } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const NAV_ITEMS = [
   { href: '/', label: 'Home' },
+  { href: '/shop', label: '🛒 Shop' },
   { href: '/about', label: 'About' },
   { href: '/rates', label: 'Daily Rates' },
   { href: '/wholesale', label: 'Wholesale' },
@@ -28,35 +29,42 @@ const Header = ({ isAdminPage = false }) => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
+          {/* Logo */}
           <a
             href="/"
-            className="flex items-center gap-2 group transition-transform hover:scale-105"
+            className="flex items-center gap-3 group transition-transform hover:scale-105"
           >
-            <span className="bg-white/20 p-2 rounded-full group-hover:rotate-12 transition-transform duration-500">
-              <Fish size={22} className="text-cyan-200" />
-            </span>
-            <h1 className="text-2xl font-extrabold tracking-tight">
-              Godavari <span className="text-cyan-200">Fish</span>
-            </h1>
+            <img
+              src="/godawari_logo.png"
+              alt="Godawari Fish & Company Logo"
+              className="h-14 w-auto drop-shadow-lg group-hover:rotate-3 transition-transform duration-500"
+            />
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-extrabold tracking-tight">
+                Godawari <span className="text-cyan-200">Fish</span>
+              </span>
+              <span className="text-xs text-cyan-300 font-semibold tracking-widest uppercase">
+                & Company
+              </span>
+            </div>
           </a>
 
           {!isAdminPage && (
             <>
-              <nav className="hidden md:flex space-x-8 items-center">
+              <nav className="hidden md:flex space-x-6 items-center">
                 {NAV_ITEMS.map((item) => (
-                  <a key={item.href} href={item.href} className="nav-link hover:text-cyan-200">
+                  <a key={item.href} href={item.href} className="nav-link hover:text-cyan-200 text-sm font-medium">
                     {item.label}
                   </a>
                 ))}
                 <a
                   href="/admin"
-                  className="btn-glow bg-gradient-to-r from-orange-500 to-amber-500 px-4 py-2 rounded-full hover:from-orange-600 hover:to-amber-600 transition transform hover:scale-105 shadow-md"
+                  className="btn-glow bg-gradient-to-r from-orange-500 to-amber-500 px-4 py-2 rounded-full hover:from-orange-600 hover:to-amber-600 transition transform hover:scale-105 shadow-md text-sm font-semibold"
                 >
                   Admin
                 </a>
               </nav>
-
               <div className="md:hidden">
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
