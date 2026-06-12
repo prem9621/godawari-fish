@@ -148,7 +148,15 @@ const ProductsTab = ({ token }) => {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       });
-      const data = await response.json();
+      
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        // If we can't parse JSON, it's probably HTML (404 or 500)
+        throw new Error(`API not responding. Make sure backend server is running locally! ${response.status} ${response.statusText}`);
+      }
+      
       if (data.error) throw new Error(data.error);
       alert(data.message);
       await load();
@@ -163,20 +171,20 @@ const ProductsTab = ({ token }) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-4 sm:p-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+      <div className="flex flex-col gap-3 mb-6">
         <h2 className="text-xl font-bold text-gray-800">Manage Products</h2>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 w-full">
           <button
             onClick={handleImportAll}
-            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
+            className="flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-xl transition text-sm font-semibold w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={saving}
           >
-            {saving && <Loader2 size={16} className="animate-spin" />}
+            {saving && <Loader2 size={18} className="animate-spin" />}
             📥 Import All Products
           </button>
           <button
             onClick={openAdd}
-            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
+            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-xl transition text-sm font-semibold w-full sm:w-auto"
           >
             <Plus size={18} /> Add Product
           </button>
@@ -221,16 +229,16 @@ const ProductsTab = ({ token }) => {
                     </td>
                     <td className="py-3 px-3 font-semibold text-gray-800">{p.name}</td>
                     <td className="py-3 px-3 text-gray-500 max-w-xs truncate">{p.description || '—'}</td>
-                    <td className="py-3 px-3 text-right">
+                    <td className="py-4 px-3 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <button onClick={() => openImageEdit(p)} className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition" title="Change Image">
-                          <ImageIcon size={16} />
+                        <button onClick={() => openImageEdit(p)} className="p-3 text-purple-600 hover:bg-purple-50 rounded-xl transition" title="Change Image">
+                          <ImageIcon size={20} />
                         </button>
-                        <button onClick={() => openEdit(p)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
-                          <Edit2 size={16} />
+                        <button onClick={() => openEdit(p)} className="p-3 text-blue-600 hover:bg-blue-50 rounded-xl transition" title="Edit">
+                          <Edit2 size={20} />
                         </button>
-                        <button onClick={() => handleDelete(p.id)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Delete">
-                          <Trash2 size={16} />
+                        <button onClick={() => handleDelete(p.id)} className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition" title="Delete">
+                          <Trash2 size={20} />
                         </button>
                       </div>
                     </td>
@@ -255,15 +263,15 @@ const ProductsTab = ({ token }) => {
                   <p className="font-semibold text-gray-800 truncate">{p.name}</p>
                   <p className="text-gray-500 text-sm truncate">{p.description || '—'}</p>
                 </div>
-                <div className="flex gap-1 flex-shrink-0">
-                  <button onClick={() => openImageEdit(p)} className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition">
-                    <ImageIcon size={15} />
+                <div className="flex gap-2 flex-shrink-0">
+                  <button onClick={() => openImageEdit(p)} className="p-3 text-purple-600 hover:bg-purple-50 rounded-xl transition">
+                    <ImageIcon size={20} />
                   </button>
-                  <button onClick={() => openEdit(p)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
-                    <Edit2 size={15} />
+                  <button onClick={() => openEdit(p)} className="p-3 text-blue-600 hover:bg-blue-50 rounded-xl transition">
+                    <Edit2 size={20} />
                   </button>
-                  <button onClick={() => handleDelete(p.id)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition">
-                    <Trash2 size={15} />
+                  <button onClick={() => handleDelete(p.id)} className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition">
+                    <Trash2 size={20} />
                   </button>
                 </div>
               </div>
@@ -286,13 +294,13 @@ const ProductsTab = ({ token }) => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Product Image</label>
                 <div
                   onClick={() => fileRef.current.click()}
-                  className="border-2 border-dashed border-gray-300 rounded-xl h-36 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
+                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
                 >
                   {imagePreview ? (
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
                   ) : (
                     <>
-                      <ImageIcon size={28} className="text-gray-300 mb-1" />
+                      <ImageIcon size={32} className="text-gray-300 mb-2" />
                       <p className="text-sm text-gray-400">Click to upload image</p>
                     </>
                   )}
@@ -302,7 +310,7 @@ const ProductsTab = ({ token }) => {
                   <button 
                     type="button"
                     onClick={() => { setImageFile(null); setImagePreview(resolveImageUrl(editProduct.image_url) || ''); }}
-                    className="mt-2 text-sm text-gray-500 hover:text-gray-700 underline"
+                    className="mt-3 text-sm text-gray-500 hover:text-gray-700 underline"
                   >
                     Keep original image
                   </button>
@@ -335,11 +343,11 @@ const ProductsTab = ({ token }) => {
               {error && <p className="text-red-600 text-sm">{error}</p>}
 
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={closeModal} className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
+                <button type="button" onClick={closeModal} className="flex-1 px-4 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
                   Cancel
                 </button>
-                <button type="submit" disabled={saving} className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
-                  {saving && <Loader2 size={16} className="animate-spin" />}
+                <button type="submit" disabled={saving} className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                  {saving && <Loader2 size={18} className="animate-spin" />}
                   {saving ? 'Saving...' : editProduct ? 'Update' : 'Add Product'}
                 </button>
               </div>
@@ -361,13 +369,13 @@ const ProductsTab = ({ token }) => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">New Product Image</label>
                 <div
                   onClick={() => fileRef.current.click()}
-                  className="border-2 border-dashed border-gray-300 rounded-xl h-36 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
+                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
                 >
                   {imagePreview ? (
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
                   ) : (
                     <>
-                      <ImageIcon size={28} className="text-gray-300 mb-1" />
+                      <ImageIcon size={32} className="text-gray-300 mb-2" />
                       <p className="text-sm text-gray-400">Click to upload new image</p>
                     </>
                   )}
@@ -378,11 +386,11 @@ const ProductsTab = ({ token }) => {
               {error && <p className="text-red-600 text-sm">{error}</p>}
 
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={closeImageModal} className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
+                <button type="button" onClick={closeImageModal} className="flex-1 px-4 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
                   Cancel
                 </button>
-                <button type="submit" disabled={saving || !imageFile} className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-lg transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
-                  {saving && <Loader2 size={16} className="animate-spin" />}
+                <button type="submit" disabled={saving || !imageFile} className="flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-xl transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                  {saving && <Loader2 size={18} className="animate-spin" />}
                   {saving ? 'Saving...' : 'Update Image'}
                 </button>
               </div>
