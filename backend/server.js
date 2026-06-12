@@ -15,6 +15,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Use persistent uploads directory if available (for Render)
+const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, 'uploads');
+
+// Make sure uploads directory exists
+import fs from 'fs';
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+
 // Middleware
 app.use(cors({
   origin: function(origin, callback) {
@@ -33,12 +42,11 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(UPLOADS_DIR));
 
 // Explicit fallback for uploads (Express 5 fix)
-import fs from 'fs';
 app.get('/uploads/:filename', (req, res) => {
-  const filePath = path.join(__dirname, 'uploads', req.params.filename);
+  const filePath = path.join(UPLOADS_DIR, req.params.filename);
   if (fs.existsSync(filePath)) {
     res.sendFile(filePath);
   } else {
@@ -49,7 +57,7 @@ app.get('/uploads/:filename', (req, res) => {
 // Multer config for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, 'uploads'));
+    cb(null, UPLOADS_DIR);
   },
   filename: (req, file, cb) => {
     const safe = file.originalname.replace(/\s+/g, '_');
