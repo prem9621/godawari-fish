@@ -32,8 +32,9 @@ const RatesTab = ({ token }) => {
       const [rData, pData] = await Promise.all([api.getRates(), api.getProducts()]);
       setRates(Array.isArray(rData) ? rData : []);
       setProducts(Array.isArray(pData) ? pData : []);
-    } catch {
-      setError('Failed to load data.');
+    } catch (err) {
+      console.error('Error loading data:', err);
+      setError(err.message || 'Failed to load data. Please refresh.');
     } finally {
       setLoading(false);
     }
@@ -86,10 +87,12 @@ const RatesTab = ({ token }) => {
       } else {
         await api.createRate(payload, token);
       }
+      
       closeModal();
       await loadAll();
-    } catch {
-      setError('Failed to save rate.');
+    } catch (err) {
+      console.error('Error saving rate:', err);
+      setError(err.message || 'Failed to save rate. Please try again.');
     } finally {
       setSaving(false);
     }

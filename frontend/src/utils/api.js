@@ -12,6 +12,15 @@ const buildUploadsUrl = (path) => {
 // are resolved against the real backend origin, not the frontend dev port.
 export const resolveImageUrl = buildUploadsUrl;
 
+// Helper to handle fetch responses
+const handleResponse = async (response) => {
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || `HTTP error! status: ${response.status}`);
+  }
+  return data;
+};
+
 export const api = {
   // Auth
   login: async (username, password) => {
@@ -20,18 +29,18 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   // Products
   getProducts: async () => {
     const res = await fetch(`${API_BASE_URL}/products`);
-    return res.json();
+    return handleResponse(res);
   },
 
   getProduct: async (id) => {
     const res = await fetch(`${API_BASE_URL}/products/${id}`);
-    return res.json();
+    return handleResponse(res);
   },
 
   createProduct: async (formData, token) => {
@@ -40,7 +49,7 @@ export const api = {
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   updateProduct: async (id, formData, token) => {
@@ -49,7 +58,7 @@ export const api = {
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   deleteProduct: async (id, token) => {
@@ -57,18 +66,18 @@ export const api = {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` },
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   // Rates
   getRates: async () => {
     const res = await fetch(`${API_BASE_URL}/rates`);
-    return res.json();
+    return handleResponse(res);
   },
 
   getRateHistory: async (productId) => {
     const res = await fetch(`${API_BASE_URL}/rates/history/${productId}`);
-    return res.json();
+    return handleResponse(res);
   },
 
   createRate: async (rate, token) => {
@@ -80,7 +89,7 @@ export const api = {
       },
       body: JSON.stringify(rate),
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   updateRate: async (id, rate, token) => {
@@ -92,20 +101,20 @@ export const api = {
       },
       body: JSON.stringify(rate),
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   // Reviews
   getReviews: async () => {
     const res = await fetch(`${API_BASE_URL}/reviews`);
-    return res.json();
+    return handleResponse(res);
   },
 
   getAdminReviews: async (token) => {
     const res = await fetch(`${API_BASE_URL}/reviews/admin`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   createReview: async (review) => {
@@ -114,7 +123,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(review),
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   updateReviewVisibility: async (id, visible, token) => {
@@ -126,13 +135,13 @@ export const api = {
       },
       body: JSON.stringify({ visible }),
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   // Site Settings
   getSettings: async () => {
     const res = await fetch(`${API_BASE_URL}/settings`);
-    return res.json();
+    return handleResponse(res);
   },
 
   updateSettings: async (formData, token) => {
@@ -141,13 +150,13 @@ export const api = {
       headers: { Authorization: `Bearer ${token}` },
       body: formData, // multipart — owner_image is a file
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   // Buying view — one row per product with its latest rate + weight
   getProductsWithRates: async () => {
     const res = await fetch(`${API_BASE_URL}/products-with-rates`);
-    return res.json();
+    return handleResponse(res);
   },
 
   // Inquiries
@@ -157,14 +166,14 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(inquiry),
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   getInquiries: async (token) => {
     const res = await fetch(`${API_BASE_URL}/inquiries`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return res.json();
+    return handleResponse(res);
   },
 
   updateInquiry: async (id, status, token) => {
@@ -176,6 +185,6 @@ export const api = {
       },
       body: JSON.stringify({ status }),
     });
-    return res.json();
+    return handleResponse(res);
   },
 };

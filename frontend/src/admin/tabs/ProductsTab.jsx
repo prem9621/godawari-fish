@@ -23,8 +23,9 @@ const ProductsTab = ({ token }) => {
     try {
       const data = await api.getProducts();
       setProducts(Array.isArray(data) ? data : []);
-    } catch {
-      setError('Failed to load products.');
+    } catch (err) {
+      console.error('Error loading products:', err);
+      setError(err.message || 'Failed to load products. Please refresh.');
     } finally {
       setLoading(false);
     }
@@ -79,10 +80,12 @@ const ProductsTab = ({ token }) => {
       } else {
         await api.createProduct(fd, token);
       }
+      
       closeModal();
       await load();
-    } catch {
-      setError('Failed to save product.');
+    } catch (err) {
+      console.error('Error saving product:', err);
+      setError(err.message || 'Failed to save product. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -93,8 +96,9 @@ const ProductsTab = ({ token }) => {
     try {
       await api.deleteProduct(id, token);
       await load();
-    } catch {
-      setError('Failed to delete product.');
+    } catch (err) {
+      console.error('Error deleting product:', err);
+      setError(err.message || 'Failed to delete product.');
     }
   };
 
