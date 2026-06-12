@@ -22,7 +22,7 @@ const Footer = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
           {/* Brand */}
           <ScrollReveal>
@@ -38,31 +38,43 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm mb-1 italic text-cyan-300">"The Real Taste of Fresh Fish"</p>
-            <p className="text-sm mt-2">Central Naka, Near MGM Hospital</p>
-            <p className="text-sm">Chhatrapati Sambhaji Nagar, Maharashtra</p>
           </ScrollReveal>
 
-          {/* Contact */}
+          {/* Our Outlets & Contact */}
           <ScrollReveal delay={100}>
-            <h3 className="text-white font-bold mb-4 gradient-text inline-block">Contact</h3>
-            <p className="text-sm mb-2">
-              <strong>Phone:</strong>
-              <a href="tel:9371306189" className="hover:text-cyan-400 transition"> 9371306189</a>
-            </p>
-            <p className="text-sm mb-2">
-              <strong>WhatsApp:</strong>
-              <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition"> Chat Now</a>
-            </p>
-            <p className="text-sm">
-              <strong>Email:</strong>
-              <a href="mailto:godawarifish189@gmail.com" className="hover:text-cyan-400 transition"> godawarifish189@gmail.com</a>
-            </p>
+            <h3 className="text-white font-bold mb-4 gradient-text inline-block">🏢 Our Outlets & Contact</h3>
+            <div className="space-y-4">
+              <div>
+                <p className="font-semibold text-white text-sm">📍 Branch 1 (Central Naka)</p>
+                <p className="text-sm">Near MGM Hospital, Chhatrapati Sambhajinagar</p>
+                <p className="text-sm">
+                  <strong>📞 Phone:</strong>
+                  <a href="tel:9371306189" className="hover:text-cyan-400 transition"> 9371306189</a>
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold text-white text-sm">📍 Branch 2 (Aurangpura)</p>
+                <p className="text-sm">Kumbharwada, Near Bhaji Mandi, Chhatrapati Sambhajinagar</p>
+                <p className="text-sm">
+                  <strong>📞 Phone:</strong>
+                  <a href="tel:9890690189" className="hover:text-cyan-400 transition"> 9890690189</a>
+                </p>
+              </div>
+              <p className="text-sm mt-3">
+                <strong>💬 WhatsApp:</strong>
+                <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition"> Chat Now</a>
+              </p>
+              <p className="text-sm">
+                <strong>✉️ Email:</strong>
+                <a href="mailto:godawarifish189@gmail.com" className="hover:text-cyan-400 transition"> godawarifish189@gmail.com</a>
+              </p>
+            </div>
           </ScrollReveal>
 
-          {/* Business Hours */}
+          {/* Business Hours & Upcoming Branches */}
           <ScrollReveal delay={200}>
-            <h3 className="text-white font-bold mb-4 gradient-text inline-block">Business Hours</h3>
-            <div className="space-y-2 text-sm">
+            <h3 className="text-white font-bold mb-4 gradient-text inline-block">⏰ Business Hours</h3>
+            <div className="space-y-2 text-sm mb-6">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                 <div>
@@ -78,29 +90,13 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-          </ScrollReveal>
-
-          {/* Quick Links */}
-          <ScrollReveal delay={300}>
-            <h3 className="text-white font-bold mb-4 gradient-text inline-block">Quick Links</h3>
-            <ul className="text-sm space-y-2">
-              {[
-                { href: '/', label: 'Home' },
-                { href: '/shop', label: '🛒 Shop' },
-                { href: '/about', label: 'About Us' },
-                { href: '/rates', label: 'Daily Rates' },
-                { href: '/contact', label: 'Contact' },
-              ].map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="hover:text-cyan-400 hover:translate-x-1 inline-block transition-transform"
-                  >
-                    → {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            
+            <h3 className="text-white font-bold mb-4 gradient-text inline-block">🚀 Upcoming Branches</h3>
+            <div className="space-y-1 text-sm">
+              <p>• Near Airport, Jalna Road</p>
+              <p>• Satara Parisar, Beed Bypass</p>
+              <p>• Chawni (Cantonment Area)</p>
+            </div>
           </ScrollReveal>
         </div>
 

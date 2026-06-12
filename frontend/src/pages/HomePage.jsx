@@ -90,7 +90,7 @@ const HomePage = () => {
 
               <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-medium mb-6 reveal">
                 <Sparkles size={16} className="text-yellow-300" />
-                <span>Fresh catch – delivered daily</span>
+                <span>🥇 39 Years of Trust • 🏆 Chhatrapati Sambhajinagar's Top Reputed Supplier</span>
               </div>
               <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
                 Fresh & Premium{' '}
@@ -99,9 +99,7 @@ const HomePage = () => {
                 </span>
               </h1>
               <p className="text-xl mb-8 text-blue-50/90 leading-relaxed">
-                Experience the finest fresh fish and seafood, delivered daily from
-                trusted suppliers. Quality assured, hygienically processed, and
-                available for retail and wholesale.
+                Chhatrapati Sambhajinagar's trusted partner for bulk restaurant supply and fresh home delivery. Premium seafood solutions for restaurants, catering events, and daily home delivery.
               </p>
 
               <div className="flex gap-4 flex-wrap">
@@ -140,13 +138,16 @@ const HomePage = () => {
                 </p>
                 <ul className="space-y-3 text-blue-50">
                   {[
+                    '🥇 39+ Years of Trust',
+                    '🏆 Chhatrapati Sambhajinagar\'s Top Reputed Supplier',
+                    '🚀 1000+ Restaurants & Families Served',
+                    '40+ Fresh Fishes Available',
+                    '15+ Frozen Seafood Options',
                     'Fresh catch delivered daily',
                     'Hygienic cutting & cleaning',
                     'Quality assured products',
                     'Wholesale & retail available',
-                    'Trusted local supplier',
                     'Fast WhatsApp ordering',
-                    '40+ varieties of fish available',
                   ].map((item, i) => (
                     <li
                       key={i}
@@ -176,17 +177,17 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-              Trusted by <span className="gradient-text">Hundreds</span> of Families
+              Trusted by <span className="gradient-text">Thousands</span> of Families
             </h2>
             <p className="text-gray-600 text-lg">
               Numbers that speak for our commitment to freshness
             </p>
           </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <AnimatedStat value="15+" label="Years Experience" delay={0} />
-            <AnimatedStat value="100%" label="Fresh Daily" delay={150} />
-            <AnimatedStat value="500+" label="Happy Customers" delay={300} />
-            <AnimatedStat value="40+" label="Fish Varieties" delay={450} />
+            <AnimatedStat value="39+" label="Years of Trust" delay={0} />
+            <AnimatedStat value="1000+" label="Happy Customers" delay={150} />
+            <AnimatedStat value="40+" label="Fresh Fishes" delay={300} />
+            <AnimatedStat value="15+" label="Frozen Seafood" delay={450} />
           </div>
         </div>
       </section>
