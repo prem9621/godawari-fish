@@ -61,11 +61,14 @@ const AdminPanel = () => {
       <div className="min-h-screen bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
           <div className="text-center mb-6">
-            <img
-              src="/godawari_logo.png"
-              alt="Godawari Fish & Company"
-              className="h-20 w-auto mx-auto mb-3 drop-shadow"
-            />
+            {/* Logo Container */}
+            <div className="inline-block bg-white rounded-xl p-3 shadow-lg mb-3">
+              <img
+                src="/godawari_logo.png"
+                alt="Godawari Fish & Company"
+                className="h-16 w-auto"
+              />
+            </div>
             <h1 className="text-2xl font-bold text-gray-800">Admin Login</h1>
             <p className="text-gray-500 text-sm mt-1">Godawari Fish & Company</p>
           </div>
@@ -129,7 +132,9 @@ const AdminPanel = () => {
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
             <div className="flex items-center gap-2">
-              <img src="/godawari_logo.png" alt="" className="h-9 w-auto" />
+              <div className="bg-white rounded-lg p-1.5 shadow-md">
+                <img src="/godawari_logo.png" alt="" className="h-6 w-auto" />
+              </div>
               <div>
                 <h1 className="text-base font-bold leading-tight">Godawari Fish & Company</h1>
                 <p className="text-blue-200 text-xs hidden sm:block">Admin Panel</p>

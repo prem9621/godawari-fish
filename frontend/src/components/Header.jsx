@@ -35,11 +35,14 @@ const Header = ({ isAdminPage = false }) => {
             href="/"
             className="flex items-center gap-3 group transition-transform hover:scale-105"
           >
-            <img
-              src="/godawari_logo.png"
-              alt="Godawari Fish & Company Logo"
-              className="h-14 w-auto drop-shadow-lg group-hover:rotate-3 transition-transform duration-500"
-            />
+            {/* Logo Container */}
+            <div className="bg-white rounded-xl p-2 shadow-lg group-hover:rotate-3 transition-transform duration-500">
+              <img
+                src="/godawari_logo.png"
+                alt="Godawari Fish & Company Logo"
+                className="h-12 w-auto"
+              />
+            </div>
             <div className="flex flex-col leading-tight">
               <span className="text-xl font-extrabold tracking-tight">
                 Godawari <span className="text-cyan-200">Fish</span>
