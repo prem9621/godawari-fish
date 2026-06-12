@@ -10,7 +10,9 @@ const ProductsTab = ({ token }) => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
   const [editProduct, setEditProduct] = useState(null); // null = add mode
+  const [imageEditProduct, setImageEditProduct] = useState(null);
   const [form, setForm] = useState(emptyForm);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
@@ -47,6 +49,42 @@ const ProductsTab = ({ token }) => {
     setImageFile(null);
     setImagePreview(resolveImageUrl(p.image_url) || '');
     setShowModal(true);
+  };
+
+  const openImageEdit = (p) => {
+    setImageEditProduct(p);
+    setImageFile(null);
+    setImagePreview(resolveImageUrl(p.image_url) || '');
+    setShowImageModal(true);
+  };
+
+  const closeImageModal = () => {
+    setShowImageModal(false);
+    setImageEditProduct(null);
+    setImageFile(null);
+    setImagePreview('');
+  };
+
+  const handleSaveImage = async (e) => {
+    e.preventDefault();
+    if (!imageFile || !imageEditProduct) return;
+    setSaving(true);
+    setError('');
+    try {
+      const fd = new FormData();
+      fd.append('name', imageEditProduct.name);
+      fd.append('description', imageEditProduct.description || '');
+      fd.append('image', imageFile);
+      
+      await api.updateProduct(imageEditProduct.id, fd, token);
+      closeImageModal();
+      await load();
+    } catch (err) {
+      console.error('Error saving image:', err);
+      setError(err.message || 'Failed to save image. Please try again.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const closeModal = () => {
@@ -155,6 +193,9 @@ const ProductsTab = ({ token }) => {
                     <td className="py-3 px-3 text-gray-500 max-w-xs truncate">{p.description || '—'}</td>
                     <td className="py-3 px-3 text-right">
                       <div className="flex items-center justify-end gap-2">
+                        <button onClick={() => openImageEdit(p)} className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition" title="Change Image">
+                          <ImageIcon size={16} />
+                        </button>
                         <button onClick={() => openEdit(p)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
                           <Edit2 size={16} />
                         </button>
@@ -185,6 +226,9 @@ const ProductsTab = ({ token }) => {
                   <p className="text-gray-500 text-sm truncate">{p.description || '—'}</p>
                 </div>
                 <div className="flex gap-1 flex-shrink-0">
+                  <button onClick={() => openImageEdit(p)} className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition">
+                    <ImageIcon size={15} />
+                  </button>
                   <button onClick={() => openEdit(p)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
                     <Edit2 size={15} />
                   </button>
@@ -224,6 +268,15 @@ const ProductsTab = ({ token }) => {
                   )}
                 </div>
                 <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+                {imagePreview && editProduct && (
+                  <button 
+                    type="button"
+                    onClick={() => { setImageFile(null); setImagePreview(resolveImageUrl(editProduct.image_url) || ''); }}
+                    className="mt-2 text-sm text-gray-500 hover:text-gray-700 underline"
+                  >
+                    Keep original image
+                  </button>
+                )}
               </div>
 
               <div>
@@ -258,6 +311,49 @@ const ProductsTab = ({ token }) => {
                 <button type="submit" disabled={saving} className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
                   {saving && <Loader2 size={16} className="animate-spin" />}
                   {saving ? 'Saving...' : editProduct ? 'Update' : 'Add Product'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Change Image Modal */}
+      {showImageModal && imageEditProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <h3 className="text-lg font-bold text-gray-800">Change Image for {imageEditProduct.name}</h3>
+              <button onClick={closeImageModal} className="p-1 hover:bg-gray-100 rounded-lg transition"><X size={20} /></button>
+            </div>
+            <form onSubmit={handleSaveImage} className="px-6 py-5 space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">New Product Image</label>
+                <div
+                  onClick={() => fileRef.current.click()}
+                  className="border-2 border-dashed border-gray-300 rounded-xl h-36 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
+                >
+                  {imagePreview ? (
+                    <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <>
+                      <ImageIcon size={28} className="text-gray-300 mb-1" />
+                      <p className="text-sm text-gray-400">Click to upload new image</p>
+                    </>
+                  )}
+                </div>
+                <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+              </div>
+
+              {error && <p className="text-red-600 text-sm">{error}</p>}
+
+              <div className="flex gap-3 pt-2">
+                <button type="button" onClick={closeImageModal} className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
+                  Cancel
+                </button>
+                <button type="submit" disabled={saving || !imageFile} className="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-lg transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                  {saving && <Loader2 size={16} className="animate-spin" />}
+                  {saving ? 'Saving...' : 'Update Image'}
                 </button>
               </div>
             </form>
