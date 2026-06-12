@@ -11,6 +11,7 @@ const buildUploadsUrl = (path) => {
 // Helper so image URLs from the backend (e.g. "/uploads/owner.jpg")
 // are resolved against the real backend origin, not the frontend dev port.
 export const resolveImageUrl = buildUploadsUrl;
+export { API_BASE_URL };
 
 // Helper to handle fetch responses
 const handleResponse = async (response) => {

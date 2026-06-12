@@ -97,11 +97,73 @@ app.post('/api/auth/login', (req, res) => {
   });
 });
 
-// ============ PRODUCTS ROUTES ============
+// ========== PRODUCTS ROUTES ==========
 app.get('/api/products', (req, res) => {
   db.all('SELECT * FROM products ORDER BY name', (err, products) => {
     if (err) return res.status(500).json({ error: 'Database error' });
     res.json(products);
+  });
+});
+
+app.post('/api/products/import-all', verifyToken, (req, res) => {
+  const FISH_CATALOGUE = [
+    { name: 'Prawn', description: 'Fresh prawns, perfect for frying, curries and biryani.' },
+    { name: 'King Prawn', description: 'Large juicy king prawns. Ideal for grilling, tandoor and special occasions.' },
+    { name: 'Pomfret', description: 'Premium white pomfret, perfect for frying and steaming.' },
+    { name: 'Indian Salmon Fish', description: 'Tasty and nutritious Indian salmon. Great for curries and fry.' },
+    { name: 'Surmai (King Fish)', description: 'Premium surmai, great for curries, steaks and fry.' },
+    { name: 'Halwa (Black Pomfret)', description: 'Black pomfret with rich flavor. Excellent for deep fry.' },
+    { name: 'Kolkata Ilish Fish', description: 'Famous Hilsa fish from Kolkata. A delicacy with unique flavor.' },
+    { name: 'Betki Fish (Chaunak)', description: 'Firm white flesh, ideal for koliwada fry.' },
+    { name: 'Hamoor Fish', description: 'Premium grouper fish. Thick juicy flesh for grilling.' },
+    { name: 'Bangda (Mackerel)', description: 'Fresh bangda for rava fry and curry.' },
+    { name: 'Tarli Fish', description: 'Small sardine-style fish, great for frying.' },
+    { name: 'Kuppa Fish (Tuna)', description: 'Fresh tuna fish, meaty and flavourful.' },
+    { name: 'Rani Fish', description: 'Pink perch with tender flesh. Perfect for frying.' },
+    { name: 'Bombil (Bombay Duck)', description: 'Iconic Bombay duck fish. Best for sun-dried or fried preparations.' },
+    { name: 'Karli Fish', description: 'Cobia fish with firm flesh. Excellent for grilling.' },
+    { name: 'Sakla (Bombay Maral)', description: 'Barracuda fish, firm and tasty.' },
+    { name: 'Singada Fish', description: 'Popular in Konkan coastal cuisine.' },
+    { name: 'Toll Fish (Green Bone)', description: 'Distinctive green bones, sweet white flesh.' },
+    { name: 'Red Snapper', description: 'Premium red snapper with firm white flesh.' },
+    { name: 'Mandeli Fish', description: 'Small coastal fish, great for frying.' },
+    { name: 'Kurchi Fish', description: 'Tasty coastal fish with unique flavour.' },
+    { name: 'Chand Paplet', description: 'Silver pomfret, the most premium pomfret variety.' },
+    { name: 'Karimi Fish', description: 'Perfect for Konkani style masala fry.' },
+    { name: 'Shark Fish (Baby Shark)', description: 'Tender baby shark meat. Rich flavour.' },
+    { name: 'Baam Fish (Black Baam)', description: 'Black eel fish with rich, hearty flavour.' },
+    { name: 'Pili Baam Fish', description: 'Yellow eel with distinctive taste.' },
+    { name: 'Lep Fish (Sole Fish)', description: 'Flat sole fish with delicate white flesh.' },
+    { name: 'Kane Fish (Lady Fish)', description: 'Slender lady fish with sweet flesh.' },
+    { name: 'Tiny Prawn', description: 'Small fresh prawns, ideal for prawn masala.' },
+    { name: 'Squids', description: 'Fresh squids, tender quality.' },
+    { name: 'Mud Crabs', description: 'Fresh mud crabs with rich, sweet meat.' },
+    { name: 'Sea Crabs', description: 'Fresh sea crabs. Perfect for crab masala.' },
+    { name: 'Oyster / Sneal', description: 'Fresh oysters, great for pan fry.' },
+    { name: 'Rahu', description: 'Most popular fresh water fish. Excellent for curries.' },
+    { name: 'Katla', description: 'Large fresh water fish with tender flesh.' },
+    { name: 'River Surmai', description: 'Fresh water king fish. Rich flavour.' },
+    { name: 'Pangaasiuss', description: 'Basa fish with mild white flesh.' },
+    { name: 'Tilapi', description: 'Mild and versatile fish. Easy to cook.' },
+    { name: 'Gawran Baam', description: 'Local fresh water eel. Rich and hearty.' },
+    { name: 'Marla Fish', description: 'Fresh water fish popular in Maharashtra.' },
+    { name: 'Tengda Fish (Kudlu Katarna)', description: 'Small fresh water catfish. Very tasty.' },
+  ];
+  
+  let inserted = 0;
+  const existingNames = [];
+  db.all('SELECT name FROM products', (err, existingProducts) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    existingProducts.forEach(p => existingNames.push(p.name.toLowerCase()));
+    
+    FISH_CATALOGUE.forEach(fish => {
+      if (!existingNames.includes(fish.name.toLowerCase())) {
+        db.run('INSERT INTO products (name, description) VALUES (?, ?)', [fish.name, fish.description]);
+        inserted++;
+      }
+    });
+    
+    res.json({ message: `Import complete! Added ${inserted} new products.` });
   });
 });
 
