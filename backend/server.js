@@ -122,47 +122,47 @@ app.get('/api/products', (req, res) => {
 
 app.post('/api/products/import-all', verifyToken, (req, res) => {
   const FISH_CATALOGUE = [
-    { name: 'Prawn', description: 'Fresh prawns, perfect for frying, curries and biryani.' },
-    { name: 'King Prawn', description: 'Large juicy king prawns. Ideal for grilling, tandoor and special occasions.' },
-    { name: 'Pomfret', description: 'Premium white pomfret, perfect for frying and steaming.' },
-    { name: 'Indian Salmon Fish', description: 'Tasty and nutritious Indian salmon. Great for curries and fry.' },
-    { name: 'Surmai (King Fish)', description: 'Premium surmai, great for curries, steaks and fry.' },
-    { name: 'Halwa (Black Pomfret)', description: 'Black pomfret with rich flavor. Excellent for deep fry.' },
-    { name: 'Kolkata Ilish Fish', description: 'Famous Hilsa fish from Kolkata. A delicacy with unique flavor.' },
-    { name: 'Betki Fish (Chaunak)', description: 'Firm white flesh, ideal for koliwada fry.' },
-    { name: 'Hamoor Fish', description: 'Premium grouper fish. Thick juicy flesh for grilling.' },
-    { name: 'Bangda (Mackerel)', description: 'Fresh bangda for rava fry and curry.' },
-    { name: 'Tarli Fish', description: 'Small sardine-style fish, great for frying.' },
-    { name: 'Kuppa Fish (Tuna)', description: 'Fresh tuna fish, meaty and flavourful.' },
-    { name: 'Rani Fish', description: 'Pink perch with tender flesh. Perfect for frying.' },
-    { name: 'Bombil (Bombay Duck)', description: 'Iconic Bombay duck fish. Best for sun-dried or fried preparations.' },
-    { name: 'Karli Fish', description: 'Cobia fish with firm flesh. Excellent for grilling.' },
-    { name: 'Sakla (Bombay Maral)', description: 'Barracuda fish, firm and tasty.' },
-    { name: 'Singada Fish', description: 'Popular in Konkan coastal cuisine.' },
-    { name: 'Toll Fish (Green Bone)', description: 'Distinctive green bones, sweet white flesh.' },
-    { name: 'Red Snapper', description: 'Premium red snapper with firm white flesh.' },
-    { name: 'Mandeli Fish', description: 'Small coastal fish, great for frying.' },
-    { name: 'Kurchi Fish', description: 'Tasty coastal fish with unique flavour.' },
-    { name: 'Chand Paplet', description: 'Silver pomfret, the most premium pomfret variety.' },
-    { name: 'Karimi Fish', description: 'Perfect for Konkani style masala fry.' },
-    { name: 'Shark Fish (Baby Shark)', description: 'Tender baby shark meat. Rich flavour.' },
-    { name: 'Baam Fish (Black Baam)', description: 'Black eel fish with rich, hearty flavour.' },
-    { name: 'Pili Baam Fish', description: 'Yellow eel with distinctive taste.' },
-    { name: 'Lep Fish (Sole Fish)', description: 'Flat sole fish with delicate white flesh.' },
-    { name: 'Kane Fish (Lady Fish)', description: 'Slender lady fish with sweet flesh.' },
-    { name: 'Tiny Prawn', description: 'Small fresh prawns, ideal for prawn masala.' },
-    { name: 'Squids', description: 'Fresh squids, tender quality.' },
-    { name: 'Mud Crabs', description: 'Fresh mud crabs with rich, sweet meat.' },
-    { name: 'Sea Crabs', description: 'Fresh sea crabs. Perfect for crab masala.' },
-    { name: 'Oyster / Sneal', description: 'Fresh oysters, great for pan fry.' },
-    { name: 'Rahu', description: 'Most popular fresh water fish. Excellent for curries.' },
-    { name: 'Katla', description: 'Large fresh water fish with tender flesh.' },
-    { name: 'River Surmai', description: 'Fresh water king fish. Rich flavour.' },
-    { name: 'Pangaasiuss', description: 'Basa fish with mild white flesh.' },
-    { name: 'Tilapi', description: 'Mild and versatile fish. Easy to cook.' },
-    { name: 'Gawran Baam', description: 'Local fresh water eel. Rich and hearty.' },
-    { name: 'Marla Fish', description: 'Fresh water fish popular in Maharashtra.' },
-    { name: 'Tengda Fish (Kudlu Katarna)', description: 'Small fresh water catfish. Very tasty.' },
+    { name: 'Prawn', description: 'Fresh prawns, perfect for frying, curries and biryani.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20prawns%20seafood%20display&image_size=square' },
+    { name: 'King Prawn', description: 'Large juicy king prawns. Ideal for grilling, tandoor and special occasions.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Large%20king%20prawns%20seafood&image_size=square' },
+    { name: 'Pomfret', description: 'Premium white pomfret, perfect for frying and steaming.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=White%20pomfret%20fish&image_size=square' },
+    { name: 'Indian Salmon Fish', description: 'Tasty and nutritious Indian salmon. Great for curries and fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Indian%20salmon%20fish%20rawas&image_size=square' },
+    { name: 'Surmai (King Fish)', description: 'Premium surmai, great for curries, steaks and fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Surmai%20king%20fish%20seer%20fish&image_size=square' },
+    { name: 'Halwa (Black Pomfret)', description: 'Black pomfret with rich flavor. Excellent for deep fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20pomfret%20halwa%20fish&image_size=square' },
+    { name: 'Kolkata Ilish Fish', description: 'Famous Hilsa fish from Kolkata. A delicacy with unique flavor.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hilsa%20ilish%20fish%20bengali&image_size=square' },
+    { name: 'Betki Fish (Chaunak)', description: 'Firm white flesh, ideal for koliwada fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Betki%20chaunak%20fish&image_size=square' },
+    { name: 'Hamoor Fish', description: 'Premium grouper fish. Thick juicy flesh for grilling.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hamoor%20grouper%20fish&image_size=square' },
+    { name: 'Bangda (Mackerel)', description: 'Fresh bangda for rava fry and curry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bangda%20mackerel%20fish&image_size=square' },
+    { name: 'Tarli Fish', description: 'Small sardine-style fish, great for frying.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tarli%20sardine%20fish&image_size=square' },
+    { name: 'Kuppa Fish (Tuna)', description: 'Fresh tuna fish, meaty and flavourful.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tuna%20fish%20fresh&image_size=square' },
+    { name: 'Rani Fish', description: 'Pink perch with tender flesh. Perfect for frying.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pink%20perch%20rani%20fish&image_size=square' },
+    { name: 'Bombil (Bombay Duck)', description: 'Iconic Bombay duck fish. Best for sun-dried or fried preparations.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bombay%20duck%20bombil%20fish&image_size=square' },
+    { name: 'Karli Fish', description: 'Cobia fish with firm flesh. Excellent for grilling.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Cobia%20karli%20fish&image_size=square' },
+    { name: 'Sakla (Bombay Maral)', description: 'Barracuda fish, firm and tasty.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Barracuda%20sakla%20fish&image_size=square' },
+    { name: 'Singada Fish', description: 'Popular in Konkan coastal cuisine.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Singada%20fish%20konkan&image_size=square' },
+    { name: 'Toll Fish (Green Bone)', description: 'Distinctive green bones, sweet white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Green%20bone%20toll%20fish&image_size=square' },
+    { name: 'Red Snapper', description: 'Premium red snapper with firm white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Red%20snapper%20fish&image_size=square' },
+    { name: 'Mandeli Fish', description: 'Small coastal fish, great for frying.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mandeli%20coastal%20fish&image_size=square' },
+    { name: 'Kurchi Fish', description: 'Tasty coastal fish with unique flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kurchi%20coastal%20fish&image_size=square' },
+    { name: 'Chand Paplet', description: 'Silver pomfret, the most premium pomfret variety.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Silver%20pomfret%20chand%20paplet&image_size=square' },
+    { name: 'Karimi Fish', description: 'Perfect for Konkani style masala fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Karimi%20fish%20konkani&image_size=square' },
+    { name: 'Shark Fish (Baby Shark)', description: 'Tender baby shark meat. Rich flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Baby%20shark%20fish&image_size=square' },
+    { name: 'Baam Fish (Black Baam)', description: 'Black eel fish with rich, hearty flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20eel%20baam%20fish&image_size=square' },
+    { name: 'Pili Baam Fish', description: 'Yellow eel with distinctive taste.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Yellow%20eel%20pili%20baam&image_size=square' },
+    { name: 'Lep Fish (Sole Fish)', description: 'Flat sole fish with delicate white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sole%20fish%20lep%20flatfish&image_size=square' },
+    { name: 'Kane Fish (Lady Fish)', description: 'Slender lady fish with sweet flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Lady%20fish%20kane%20tenualosa&image_size=square' },
+    { name: 'Tiny Prawn', description: 'Small fresh prawns, ideal for prawn masala.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiny%20prawns%20small%20shrimp&image_size=square' },
+    { name: 'Squids', description: 'Fresh squids, tender quality.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20squids%20calamari&image_size=square' },
+    { name: 'Mud Crabs', description: 'Fresh mud crabs with rich, sweet meat.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mud%20crabs%20seafood&image_size=square' },
+    { name: 'Sea Crabs', description: 'Fresh sea crabs. Perfect for crab masala.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sea%20crabs%20seafood&image_size=square' },
+    { name: 'Oyster / Sneal', description: 'Fresh oysters, great for pan fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20oysters%20seafood&image_size=square' },
+    { name: 'Rahu', description: 'Most popular fresh water fish. Excellent for curries.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Rohu%20rahu%20freshwater%20fish&image_size=square' },
+    { name: 'Katla', description: 'Large fresh water fish with tender flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Katla%20freshwater%20fish&image_size=square' },
+    { name: 'River Surmai', description: 'Fresh water king fish. Rich flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=River%20surmai%20freshwater%20fish&image_size=square' },
+    { name: 'Pangaasiuss', description: 'Basa fish with mild white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Basa%20pangasius%20fish&image_size=square' },
+    { name: 'Tilapi', description: 'Mild and versatile fish. Easy to cook.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tilapia%20fish&image_size=square' },
+    { name: 'Gawran Baam', description: 'Local fresh water eel. Rich and hearty.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20eel%20gawran%20baam&image_size=square' },
+    { name: 'Marla Fish', description: 'Fresh water fish popular in Maharashtra.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Marla%20freshwater%20fish%20maharashtra&image_size=square' },
+    { name: 'Tengda Fish (Kudlu Katarna)', description: 'Small fresh water catfish. Very tasty.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20catfish%20tengda&image_size=square' }
   ];
   
   let inserted = 0;
@@ -173,13 +173,74 @@ app.post('/api/products/import-all', verifyToken, (req, res) => {
     
     FISH_CATALOGUE.forEach(fish => {
       if (!existingNames.includes(fish.name.toLowerCase())) {
-        db.run('INSERT INTO products (name, description) VALUES (?, ?)', [fish.name, fish.description]);
+        db.run('INSERT INTO products (name, description, image_url) VALUES (?, ?, ?)', [fish.name, fish.description, fish.image]);
         inserted++;
+      } else {
+        db.run('UPDATE products SET image_url = ? WHERE name = ?', [fish.image, fish.name]);
       }
     });
     
-    res.json({ message: `Import complete! Added ${inserted} new products.` });
+    res.json({ message: `Import complete! Added ${inserted} new products and updated images for existing ones!` });
   });
+});
+
+app.post('/api/products/seed-images', verifyToken, (req, res) => {
+  const FISH_CATALOGUE = [
+    { name: 'Prawn', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20prawns%20seafood%20display&image_size=square' },
+    { name: 'King Prawn', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Large%20king%20prawns%20seafood&image_size=square' },
+    { name: 'Pomfret', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=White%20pomfret%20fish&image_size=square' },
+    { name: 'Indian Salmon Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Indian%20salmon%20fish%20rawas&image_size=square' },
+    { name: 'Surmai (King Fish)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Surmai%20king%20fish%20seer%20fish&image_size=square' },
+    { name: 'Halwa (Black Pomfret)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20pomfret%20halwa%20fish&image_size=square' },
+    { name: 'Kolkata Ilish Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hilsa%20ilish%20fish%20bengali&image_size=square' },
+    { name: 'Betki Fish (Chaunak)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Betki%20chaunak%20fish&image_size=square' },
+    { name: 'Hamoor Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hamoor%20grouper%20fish&image_size=square' },
+    { name: 'Bangda (Mackerel)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bangda%20mackerel%20fish&image_size=square' },
+    { name: 'Tarli Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tarli%20sardine%20fish&image_size=square' },
+    { name: 'Kuppa Fish (Tuna)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tuna%20fish%20fresh&image_size=square' },
+    { name: 'Rani Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pink%20perch%20rani%20fish&image_size=square' },
+    { name: 'Bombil (Bombay Duck)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bombay%20duck%20bombil%20fish&image_size=square' },
+    { name: 'Karli Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Cobia%20karli%20fish&image_size=square' },
+    { name: 'Sakla (Bombay Maral)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Barracuda%20sakla%20fish&image_size=square' },
+    { name: 'Singada Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Singada%20fish%20konkan&image_size=square' },
+    { name: 'Toll Fish (Green Bone)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Green%20bone%20toll%20fish&image_size=square' },
+    { name: 'Red Snapper', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Red%20snapper%20fish&image_size=square' },
+    { name: 'Mandeli Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mandeli%20coastal%20fish&image_size=square' },
+    { name: 'Kurchi Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kurchi%20coastal%20fish&image_size=square' },
+    { name: 'Chand Paplet', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Silver%20pomfret%20chand%20paplet&image_size=square' },
+    { name: 'Karimi Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Karimi%20fish%20konkani&image_size=square' },
+    { name: 'Shark Fish (Baby Shark)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Baby%20shark%20fish&image_size=square' },
+    { name: 'Baam Fish (Black Baam)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20eel%20baam%20fish&image_size=square' },
+    { name: 'Pili Baam Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Yellow%20eel%20pili%20baam&image_size=square' },
+    { name: 'Lep Fish (Sole Fish)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sole%20fish%20lep%20flatfish&image_size=square' },
+    { name: 'Kane Fish (Lady Fish)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Lady%20fish%20kane%20tenualosa&image_size=square' },
+    { name: 'Tiny Prawn', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiny%20prawns%20small%20shrimp&image_size=square' },
+    { name: 'Squids', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20squids%20calamari&image_size=square' },
+    { name: 'Mud Crabs', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mud%20crabs%20seafood&image_size=square' },
+    { name: 'Sea Crabs', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sea%20crabs%20seafood&image_size=square' },
+    { name: 'Oyster / Sneal', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20oysters%20seafood&image_size=square' },
+    { name: 'Rahu', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Rohu%20rahu%20freshwater%20fish&image_size=square' },
+    { name: 'Katla', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Katla%20freshwater%20fish&image_size=square' },
+    { name: 'River Surmai', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=River%20surmai%20freshwater%20fish&image_size=square' },
+    { name: 'Pangaasiuss', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Basa%20pangasius%20fish&image_size=square' },
+    { name: 'Tilapi', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tilapia%20fish&image_size=square' },
+    { name: 'Gawran Baam', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20eel%20gawran%20baam&image_size=square' },
+    { name: 'Marla Fish', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Marla%20freshwater%20fish%20maharashtra&image_size=square' },
+    { name: 'Tengda Fish (Kudlu Katarna)', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20catfish%20tengda&image_size=square' }
+  ];
+  
+  let updated = 0;
+  FISH_CATALOGUE.forEach(fish => {
+    db.run('UPDATE products SET image_url = ? WHERE name = ?', [fish.image, fish.name], function(err) {
+      if (err) {
+        console.error(`Error updating ${fish.name}:`, err);
+      } else {
+        updated++;
+      }
+    });
+  });
+  
+  res.json({ message: `Images seeded for ${updated} products!` });
 });
 
 app.get('/api/products/:id', (req, res) => {
