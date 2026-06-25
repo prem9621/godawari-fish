@@ -112,6 +112,24 @@ app.post('/api/auth/login', (req, res) => {
   });
 });
 
+// Add a reset admin endpoint (for convenience)
+app.post('/api/auth/reset-admin', (req, res) => {
+  const hashedPassword = bcryptjs.hashSync(process.env.ADMIN_PASSWORD, 10);
+  
+  db.run('DELETE FROM admin_users', (err) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    
+    db.run(
+      'INSERT INTO admin_users (username, password) VALUES (?, ?)',
+      [process.env.ADMIN_USERNAME, hashedPassword],
+      (err) => {
+        if (err) return res.status(500).json({ error: 'Database error' });
+        res.json({ message: 'Admin user reset successfully', username: process.env.ADMIN_USERNAME });
+      }
+    );
+  });
+});
+
 // ========== PRODUCTS ROUTES ==========
 app.get('/api/products', (req, res) => {
   db.all('SELECT * FROM products ORDER BY name', (err, products) => {
