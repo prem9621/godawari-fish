@@ -14,7 +14,7 @@ services:
       - key: PORT
         value: 5000
       - key: JWT_SECRET
-        generateValue: true
+        value: your_jwt_secret_key_change_this_in_production
       - key: ADMIN_EMAIL
         value: godawarifish189@gmail.com
       - key: ADMIN_USERNAME
