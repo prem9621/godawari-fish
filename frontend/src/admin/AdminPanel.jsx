@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { api } from '../utils/api';
 import { LogOut, Package, TrendingUp, Inbox, Star, Settings, Menu, X } from 'lucide-react';
 import ProductsTab from './tabs/ProductsTab';
@@ -24,6 +24,28 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Listen for changes to localStorage (like when we remove the token on 401 errors)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(localStorage.getItem('adminToken') || '');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also check periodically (just in case)
+    const interval = setInterval(() => {
+      const currentToken = localStorage.getItem('adminToken');
+      if (currentToken !== token) {
+        setToken(currentToken || '');
+      }
+    }, 500);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [token]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -38,8 +60,8 @@ const AdminPanel = () => {
       } else {
         setLoginError(response.error || 'Login failed');
       }
-    } catch {
-      setLoginError('Login failed. Please try again.');
+    } catch (err) {
+      setLoginError(err.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }

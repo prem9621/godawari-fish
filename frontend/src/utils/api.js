@@ -17,7 +17,11 @@ export { API_BASE_URL };
 const handleResponse = async (response) => {
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.error || `HTTP error! status: ${response.status}`);
+    // If it's a 401 error, it means invalid token - we should clear it!
+    if (response.status === 401) {
+      localStorage.removeItem('adminToken');
+    }
+    throw new Error(data.error || data.details || `HTTP error! status: ${response.status}`);
   }
   return data;
 };
