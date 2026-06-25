@@ -14,7 +14,7 @@ services:
       - key: PORT
         value: 5000
       - key: JWT_SECRET
-        value: your_jwt_secret_key_change_this_in_production
+        value: godavari_fish_jwt_secret_key_2024
       - key: ADMIN_EMAIL
         value: godawarifish189@gmail.com
       - key: ADMIN_USERNAME
