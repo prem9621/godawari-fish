@@ -11,6 +11,9 @@ import { verifyToken } from './middleware/auth.js';
 
 dotenv.config();
 
+console.log('=== JWT_SECRET loaded:', process.env.JWT_SECRET ? 'YES' : 'NO');
+console.log('=== JWT_SECRET value:', process.env.JWT_SECRET);
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -89,6 +92,8 @@ initializeAdmin();
 app.post('/api/auth/login', (req, res) => {
   const { username, password } = req.body;
 
+  console.log('=== Login attempt for username:', username);
+
   if (!username || !password) {
     return res.status(400).json({ error: 'Username and password required' });
   }
@@ -100,7 +105,9 @@ app.post('/api/auth/login', (req, res) => {
     const isPasswordValid = bcryptjs.compareSync(password, user.password);
     if (!isPasswordValid) return res.status(401).json({ error: 'Invalid credentials' });
 
+    console.log('=== Generating token with JWT_SECRET:', process.env.JWT_SECRET);
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    console.log('=== Generated token:', token);
     res.json({ token, message: 'Login successful' });
   });
 });
