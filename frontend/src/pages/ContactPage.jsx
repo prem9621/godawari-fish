@@ -45,7 +45,7 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="bg-gradient-to-r from-green-600 to-green-800 text-white py-14 animate-gradient relative overflow-hidden">
+      <section className="bg-gradient-to-r from-green-600 to-green-800 text-white pt-32 pb-14 animate-gradient relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <img src="/godawari_logo.png" alt="Godawari Fish & Company" className="h-20 w-auto mx-auto mb-4 drop-shadow-xl animate-float" />
           <h1 className="text-4xl font-bold mb-2">Contact Us</h1>

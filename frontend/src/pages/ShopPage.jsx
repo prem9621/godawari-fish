@@ -256,11 +256,11 @@ const ShopPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <section className="relative overflow-hidden bg-gradient-to-r from-green-600 via-emerald-500 to-green-700 text-white py-16 animate-gradient">
+      <section className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-800 text-white pt-32 pb-12 animate-gradient">
         <BubbleBackground count={15} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <img src="/godawari_logo.png" alt="Godawari Fish & Company" className="h-20 w-auto mx-auto mb-4 drop-shadow-xl animate-float" />
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3">Our Fish Menu</h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-2">Our Fish Menu</h1>
           <p className="text-green-100 text-lg mb-1">Godawari Fish & Company – 40+ Varieties</p>
           <p className="text-emerald-200 text-sm italic">"The Real Taste of Fresh Fish"</p>
           {lastUpdated && <p className="text-white/60 text-xs mt-2">Rates updated: {lastUpdated.toLocaleTimeString()}</p>}

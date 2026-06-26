@@ -46,7 +46,7 @@ const WholesalePage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="bg-gradient-to-r from-green-600 to-green-800 text-white py-12">
+      <section className="bg-gradient-to-r from-green-600 to-green-800 text-white pt-32 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-2">Wholesale & Bulk Supply</h1>
           <p className="text-green-100 text-lg">Premium quality seafood for hotels, restaurants, and businesses</p>

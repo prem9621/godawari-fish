@@ -15,7 +15,7 @@ const Header = ({ isAdminPage = false }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -25,7 +25,7 @@ const Header = ({ isAdminPage = false }) => {
       className={`fixed top-0 left-0 right-0 z-50 text-white transition-all duration-500 ${
         scrolled
           ? 'bg-gradient-to-r from-green-700/95 to-green-900/95 backdrop-blur-md shadow-2xl animate-gradient'
-          : 'bg-transparent shadow-none'
+          : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
