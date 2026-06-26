@@ -73,7 +73,8 @@ const HomePage = () => {
 
   const videos = [
     "https://cdn.pixabay.com/video/2024/08/18/227132_medium.mp4?download",
-    "https://cdn.pixabay.com/video/2024/08/18/227128_medium.mp4?download"
+    "https://cdn.pixabay.com/video/2024/08/18/227128_medium.mp4?download",
+    "https://cdn.pixabay.com/video/2019/03/31/22476-328008668_medium.mp4?download"
   ];
 
   const handleVideoEnd = () => {
@@ -116,7 +117,7 @@ const HomePage = () => {
       {!splashDone && <SplashScreen onDone={handleSplashDone} />}
 
       {/* Hero Section with Video Slider */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-20">
         {videos.map((src, index) => (
           <video
             key={index}
@@ -125,7 +126,7 @@ const HomePage = () => {
             muted
             playsInline
             onEnded={handleVideoEnd}
-            className={`w-full h-[60vh] md:h-[75vh] object-cover absolute top-0 left-0 transition-opacity duration-1000 ${
+            className={`w-full h-[60vh] md:h-[75vh] object-cover absolute top-20 left-0 transition-opacity duration-1000 ${
               index === currentVideoIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
@@ -133,6 +134,7 @@ const HomePage = () => {
           </video>
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-20" />
+        <div className="relative h-[60vh] md:h-[75vh]"></div>
       </section>
 
       {/* About Section */}
