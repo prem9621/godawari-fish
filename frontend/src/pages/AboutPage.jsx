@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle, MapPin, Sparkles, User } from 'lucide-react';
+import { CheckCircle, MapPin, Sparkles, User, Clock, TrendingUp, Building2, Users, Home, Utensils } from 'lucide-react';
 import { api, resolveImageUrl } from '../utils/api';
 import ScrollReveal from '../components/ScrollReveal';
-
-const FALLBACK_STORY =
-  'Godavari Fish, owned by Sameer Qureshi & Brothers, has been serving the community with premium quality seafood for over 15 years. Located in the heart of Central Naka, near MGM Hospital, we have built a reputation as the most trusted local seafood supplier. Our commitment to quality starts from the source — we partner with trusted suppliers to ensure that only the freshest catch reaches your table. Every product undergoes strict quality checks before reaching our customers.';
 
 const AboutPage = () => {
   const [settings, setSettings] = useState(null);
@@ -31,10 +28,9 @@ const AboutPage = () => {
 
   const ownerName = settings?.owner_name || 'Sameer Qureshi';
   const ownerRole =
-    settings?.owner_role || 'Owner · Sameer Qureshi & Brothers';
+    settings?.owner_role || 'Director · Sameer Qureshi';
   const ownerBio = settings?.owner_bio || '';
   const ownerImage = resolveImageUrl(settings?.owner_image_url);
-  const businessStory = settings?.business_story || FALLBACK_STORY;
 
   return (
     <div className="min-h-screen bg-white">
@@ -42,10 +38,10 @@ const AboutPage = () => {
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2">
-            About Godavari Fish
+            Godawari Fish: A Legacy of Trust, Quality, and Generations
           </h1>
           <p className="text-blue-100 text-base sm:text-lg">
-            Bringing Fresh Seafood Excellence to Your Table
+            Delivering Freshness from Godavari to Your Kitchen Since 1985
           </p>
         </div>
       </section>
@@ -53,31 +49,116 @@ const AboutPage = () => {
       {/* Main Content */}
       <section className="py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Owner + Story — owner stacks above on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start mb-16">
-            {/* Business Story */}
-            <ScrollReveal>
-              <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
-                <Sparkles size={16} />
-                Our Story
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold mb-4 sm:mb-6">
-                Three Generations of{' '}
-                <span className="gradient-text">Trust</span>
-              </h2>
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base whitespace-pre-line">
-                {businessStory}
+          {/* Our Story */}
+          <ScrollReveal className="mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+              <Sparkles size={16} />
+              Our Story: A Teacher’s Vision, An Unwavering Trust
+            </div>
+            <div className="space-y-6 text-gray-700 leading-relaxed text-sm sm:text-base">
+              <p>
+                Our journey began in 1985-86, when our founder, Mr. Ahmed Sahab, a visionary teacher, recognized the unmatched quality of fish from the Jayakwadi Dam (Nathsagar). He pioneered the bold initiative of supplying premium fish from Aurangabad to the markets of Kolkata. He always believed that "Success demands time" (सफलता वक्त मांगती है)—and it was this patience and foresight that laid our foundation.
               </p>
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base mt-4">
-                Whether you're looking for fresh fish for your family dinner or
-                bulk supplies for your restaurant, we have everything you need.
+              <p>
+                When circumstances in Kolkata took a turn in 1987-88, bringing our supply chain to a halt, Mr. Ahmed Sahab did not lose hope. Turning this challenge into an opportunity, he embraced the spirit of resilience. From 1988 to 1990, he worked tirelessly, selling fish on footpaths, in baskets, and across open streets. This period was a true test of his passion and determination. This struggle paved the way for our growth, culminating in the opening of our first permanent shop at Baroodgar Nala in 1992.
               </p>
-            </ScrollReveal>
+              <p>
+                From that era to this day, we have maintained a strong presence in the city’s weekly markets. Naseer Bhai played a pivotal role by operating in these markets, selling fresh produce, and personally connecting with customers to introduce them to our permanent retail outlet, effectively making them a part of our extended family.
+              </p>
+              <p>
+                Today, the reins of our business are in the capable hands of our second-generation head, Moin Qureshi Sahab, under whose expert guidance and leadership our entire business operations are centralized.
+              </p>
+            </div>
+          </ScrollReveal>
 
-            {/* Owner Profile Card */}
-            <ScrollReveal delay={150}>
+          {/* Timeline */}
+          <ScrollReveal className="mb-12 sm:mb-16" delay={150}>
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center">
+              The Timeline of Our <span className="text-blue-600">Growth</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {[
+                { year: '1996-97', event: 'Expanded our reach to the growing areas of Cidco and MIDC with our Central Naka branch.' },
+                { year: '2001-02', event: 'Bashir Ahmed Sahab pioneered large-scale Hotel Supplies to meet the needs of the hospitality sector.' },
+                { year: '2004', event: 'Wazir Qureshi introduced a premium range of seafood, catering to the South Indian and Bengali communities in MIDC.' },
+                { year: '2012', event: 'Sameer Qureshi revolutionized the market by introducing frozen and imported seafood (Norwegian Salmon, Japanese Tuna, Vietnamese Basa, and Export-Quality Prawns).' },
+                { year: '2016', event: 'Zaheer Qureshi inaugurated a new branch in the Satara area (Beed Bypass Road) to better serve our customers.' },
+              ].map((item, idx) => (
+                <div key={idx} className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 sm:p-6 rounded-xl border border-blue-200">
+                  <h3 className="font-bold text-lg sm:text-xl text-blue-700 mb-2">{item.year}</h3>
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{item.event}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Quick Highlights */}
+          <ScrollReveal className="mb-12 sm:mb-16" delay={300}>
+            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 sm:p-8 md:p-10 rounded-2xl">
+              <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center">
+                Quick <span className="text-blue-600">Highlights</span>
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                <div className="bg-white p-5 sm:p-6 rounded-xl shadow-md text-center">
+                  <Clock className="mx-auto text-blue-600 mb-3" size={32} />
+                  <h4 className="font-bold text-base sm:text-lg mb-1">Established</h4>
+                  <p className="text-gray-700 text-sm sm:text-base">1985</p>
+                </div>
+                <div className="bg-white p-5 sm:p-6 rounded-xl shadow-md text-center">
+                  <Users className="mx-auto text-blue-600 mb-3" size={32} />
+                  <h4 className="font-bold text-base sm:text-lg mb-1">Generations</h4>
+                  <p className="text-gray-700 text-sm sm:text-base">3rd Generation Strong</p>
+                </div>
+                <div className="bg-white p-5 sm:p-6 rounded-xl shadow-md text-center">
+                  <TrendingUp className="mx-auto text-blue-600 mb-3" size={32} />
+                  <h4 className="font-bold text-base sm:text-lg mb-1">Mission</h4>
+                  <p className="text-gray-700 text-sm sm:text-base">Delivering Freshness from Godavari to Your Kitchen</p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Our Services */}
+          <ScrollReveal className="mb-12 sm:mb-16" delay={450}>
+            <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center">
+              Our <span className="text-blue-600">Services</span>
+            </h2>
+            <p className="text-center text-gray-700 text-sm sm:text-base mb-6 sm:mb-8 max-w-3xl mx-auto">
+              We don't just sell fish; we cater to the vital needs of Aurangabad.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {[
+                { icon: Home, title: 'Retail Outlets', description: 'Freshness you can trust.' },
+                { icon: Utensils, title: 'Hotel, Catering & Canteen Supply', description: 'Trusted partners for major hotels and corporate kitchens.' },
+                { icon: TrendingUp, title: 'Home Delivery', description: 'Bringing premium seafood to your doorstep.' },
+                { icon: Building2, title: 'Institutional Supply', description: 'Proud suppliers to the Siddharth Garden wildlife.' },
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white p-5 sm:p-6 rounded-xl shadow-md border border-gray-100 text-center">
+                  <item.icon className="mx-auto text-blue-600 mb-3" size={32} />
+                  <h4 className="font-bold text-base sm:text-lg mb-2">{item.title}</h4>
+                  <p className="text-gray-700 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Stepping into the Future */}
+          <ScrollReveal className="mb-12 sm:mb-16" delay={600}>
+            <div className="bg-gradient-to-r from-blue-700 to-cyan-800 p-6 sm:p-8 md:p-10 rounded-2xl text-white">
+              <h2 className="text-2xl sm:text-3xl font-extrabold mb-4 sm:mb-6 text-center">
+                Stepping into the <span className="text-cyan-200">Future</span>
+              </h2>
+              <p className="text-center text-blue-50 text-sm sm:text-base leading-relaxed">
+                As of 2026-27, our third generation—Tausif Qureshi, Shahbaz Khan, Adil Qureshi, and Uzair Nasir Qureshi—is taking this legacy to new heights. By 2028, our goal is to strengthen our network by expanding with 5 to 6 new branches not just within the city, but also in other cities beyond Aurangabad.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Owner Profile Card + Note from Founder's Desk */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start mb-12 sm:mb-16">
+            <ScrollReveal>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-300/40 to-blue-500/40 rounded-3xl blur-2xl animate-pulse-glow pointer-events-none"></div>
+                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-300/40 to-blue-500/40 rounded-3xl blur-2xl pointer-events-none"></div>
                 <div className="relative bg-gradient-to-br from-blue-500/95 to-cyan-600/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-white/20 shadow-2xl text-white">
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
                     <div className="relative flex-shrink-0">
@@ -90,7 +171,6 @@ const AboutPage = () => {
                             alt={ownerName}
                             className="w-full h-full object-cover"
                             onError={(e) => {
-                              // Fall back to placeholder if the image 404s
                               e.currentTarget.style.display = 'none';
                               e.currentTarget.parentElement
                                 .querySelector('svg.placeholder')
@@ -119,83 +199,35 @@ const AboutPage = () => {
                       )}
                     </div>
                   </div>
+                </div>
+              </div>
+            </ScrollReveal>
 
-                  <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div className="bg-white/15 backdrop-blur-sm p-3 rounded-xl border border-white/20 text-center">
-                      <p className="text-xs uppercase tracking-wider text-cyan-100">
-                        Founded
-                      </p>
-                      <p className="font-bold text-sm sm:text-base">
-                        15+ Years
-                      </p>
-                    </div>
-                    <div className="bg-white/15 backdrop-blur-sm p-3 rounded-xl border border-white/20 text-center">
-                      <p className="text-xs uppercase tracking-wider text-cyan-100">
-                        Customers
-                      </p>
-                      <p className="font-bold text-sm sm:text-base">500+</p>
-                    </div>
-                    <div className="bg-white/15 backdrop-blur-sm p-3 rounded-xl border border-white/20 text-center">
-                      <p className="text-xs uppercase tracking-wider text-cyan-100">
-                        Support
-                      </p>
-                      <p className="font-bold text-sm sm:text-base">24/7</p>
-                    </div>
-                  </div>
+            <ScrollReveal delay={150}>
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 sm:p-8 rounded-2xl border border-blue-200">
+                <h4 className="font-bold text-lg sm:text-xl text-blue-800 mb-4">
+                  A Note from the Founder’s Desk
+                </h4>
+                <div className="text-gray-700 text-sm sm:text-base leading-relaxed italic space-y-4">
+                  <p>
+                    "My journey with Godawari Fish has been more than just a business; it has been a commitment to quality and a promise of freshness that our family has upheld since 1985. Every piece of seafood that reaches your table carries the legacy of my grandfather, the hard work of our elders, and the passion of our current team."
+                  </p>
+                  <p>
+                    "As we continue to grow beyond Aurangabad, our goal remains simple: to serve you with the same integrity and excellence that started on a small street corner decades ago. Thank you for making us a part of your homes and celebrations."
+                  </p>
+                  <p className="font-semibold text-right mt-4 not-italic text-blue-800">
+                    — Sameer Qureshi<br />
+                    <span className="text-sm">Director, Godawari Fish</span>
+                  </p>
                 </div>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Quality Highlights */}
-          <ScrollReveal className="mb-12 sm:mb-16">
-            <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 sm:p-8 md:p-12 rounded-2xl">
-              <h2 className="text-2xl sm:text-3xl font-extrabold mb-8 sm:mb-12 text-center">
-                Our Commitment to <span className="gradient-text">Quality</span>
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-                {[
-                  {
-                    title: 'Fresh Daily Stock',
-                    description:
-                      'We receive fresh catch daily from trusted suppliers, ensuring the best quality products',
-                  },
-                  {
-                    title: 'Hygienic Processing',
-                    description:
-                      'All fish and seafood are processed in clean, hygienic conditions with expert care',
-                  },
-                  {
-                    title: 'Quality Assurance',
-                    description:
-                      'Every product undergoes strict quality checks before it reaches your table',
-                  },
-                  {
-                    title: 'Trusted Supplier',
-                    description:
-                      'We have earned the trust of hundreds of families and businesses in the community',
-                  },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="glow-card bg-white p-5 sm:p-6 rounded-xl shadow-md"
-                  >
-                    <h3 className="font-bold text-base sm:text-lg mb-2 sm:mb-3 text-blue-600">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-700 text-sm leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Quick Facts (kept from the original page) */}
+          {/* Quick Facts */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
             {[
-              { title: 'Founded', desc: 'Over 15 years in the seafood business' },
+              { title: 'Founded', desc: '1985 · 3rd Generation Strong' },
               { title: 'Location', desc: 'Central Naka, Near MGM Hospital, Chhatrapati Sambhaji Nagar' },
               { title: 'Contact', desc: '📞 9371306189  ·  📧 godawarifish189@gmail.com' },
             ].map((item) => (
