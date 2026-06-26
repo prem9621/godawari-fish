@@ -90,15 +90,7 @@ const HomePage = () => {
         <div className="relative h-[60vh] md:h-[75vh] z-20 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-4xl md:text-6xl font-extrabold mb-2">Godawari Fish & Company</h1>
-            <p className="text-xl md:text-2xl text-cyan-200 font-bold mb-4">The Real Taste of Fresh Fish</p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <a href="/shop" className="btn-glow ripple shake pop-hover bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
-                🛒 Our Fish
-              </a>
-              <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="btn-glow ripple shake pop-hover bg-white hover:bg-gray-100 text-green-600 px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
-                💬 Order Now
-              </a>
-            </div>
+            <p className="text-xl md:text-2xl text-cyan-200 font-bold">The Real Taste of Fresh Fish</p>
           </div>
         </div>
       </section>
