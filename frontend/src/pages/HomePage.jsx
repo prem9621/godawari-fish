@@ -6,43 +6,6 @@ import ServicesSection from '../components/ServicesSection';
 import ScrollReveal from '../components/ScrollReveal';
 import AnimatedStat from '../components/AnimatedStat';
 
-const SplashScreen = ({ onDone }) => {
-  const [hide, setHide] = useState(false);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setHide(true), 2800);
-    const t2 = setTimeout(() => onDone(), 3300);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [onDone]);
-
-  return (
-    <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-green-700 via-emerald-600 to-green-900 transition-opacity duration-500 ${
-        hide ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
-    >
-      <div className="relative z-10 flex flex-col items-center gap-6 animate-bounce-in">
-        <img
-          src="/godawari_logo.png"
-          alt="Godawari Fish & Company"
-          className="h-40 w-auto drop-shadow-2xl animate-float"
-        />
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg">
-            Godawari Fish
-          </h1>
-          <p className="text-emerald-200 font-bold text-xl tracking-widest uppercase mt-1">
-            & Company
-          </p>
-          <p className="text-white/80 text-lg mt-3 italic">
-            "The Real Taste of Fresh Fish"
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ProductCategory = ({ title, image, delay }) => (
   <ScrollReveal delay={delay} className="group relative overflow-hidden rounded-3xl shadow-xl glow-card pop-hover">
     <img
@@ -65,9 +28,6 @@ const ProductCategory = ({ title, image, delay }) => (
 );
 
 const HomePage = () => {
-  const [splashDone, setSplashDone] = useState(
-    () => sessionStorage.getItem('splashShown') === 'true'
-  );
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRefs = useRef([]);
 
@@ -87,11 +47,6 @@ const HomePage = () => {
       currentVideo.play();
     }
   }, [currentVideoIndex]);
-
-  const handleSplashDone = () => {
-    sessionStorage.setItem('splashShown', 'true');
-    setSplashDone(true);
-  };
 
   const categories = [
     {
@@ -114,10 +69,8 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {!splashDone && <SplashScreen onDone={handleSplashDone} />}
-
       {/* Hero Section with Video Slider */}
-      <section className="relative overflow-hidden pt-20">
+      <section className="relative overflow-hidden">
         {videos.map((src, index) => (
           <video
             key={index}
@@ -126,15 +79,29 @@ const HomePage = () => {
             muted
             playsInline
             onEnded={handleVideoEnd}
-            className={`w-full h-[60vh] md:h-[75vh] object-cover absolute top-20 left-0 transition-opacity duration-1000 ${
-              index === currentVideoIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            className={`w-full h-[60vh] md:h-[75vh] object-cover absolute top-0 left-0 transition-opacity duration-1000 ${
+              index === currentVideoIndex ? 'opacity-100 z-0' : 'opacity-0 z-[-1]'
             }`}
           >
             <source src={src} type="video/mp4" />
           </video>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-20" />
-        <div className="relative h-[60vh] md:h-[75vh]"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-10" />
+        <div className="relative h-[60vh] md:h-[75vh] z-20 flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <img src="/godawari_logo.png" alt="Godawari Fish & Company" className="h-24 md:h-32 w-auto mx-auto mb-4 drop-shadow-xl animate-float" />
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-2">Godawari Fish & Company</h1>
+            <p className="text-xl md:text-2xl text-cyan-200 font-bold mb-4">The Real Taste of Fresh Fish</p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <a href="/shop" className="btn-glow ripple shake pop-hover bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
+                🛒 Our Fish
+              </a>
+              <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="btn-glow ripple shake pop-hover bg-white hover:bg-gray-100 text-green-600 px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
+                💬 Order Now
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* About Section */}
@@ -156,7 +123,7 @@ const HomePage = () => {
                 are sourced directly from trusted fishermen and suppliers, ensuring the highest 
                 quality and freshness for our customers.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="bg-green-100 p-3 rounded-full">
@@ -182,7 +149,7 @@ const HomePage = () => {
                 </div>
               </div>
             </ScrollReveal>
-            
+
             <ScrollReveal delay={200}>
               <img
                 src="https://images.unsplash.com/photo-1485921325833-c519f76c4927?w=600&h=700&fit=crop"
@@ -205,7 +172,7 @@ const HomePage = () => {
               Explore all our fresh and frozen fish products with guaranteed quality!
             </p>
           </ScrollReveal>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category, index) => (
               <ProductCategory
