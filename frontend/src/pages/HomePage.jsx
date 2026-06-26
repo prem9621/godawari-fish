@@ -89,7 +89,6 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-10" />
         <div className="relative h-[60vh] md:h-[75vh] z-20 flex items-center justify-center">
           <div className="text-center text-white px-4">
-            <img src="/godawari_logo.png" alt="Godawari Fish & Company" className="h-24 md:h-32 w-auto mx-auto mb-4 drop-shadow-xl animate-float" />
             <h1 className="text-4xl md:text-6xl font-extrabold mb-2">Godawari Fish & Company</h1>
             <p className="text-xl md:text-2xl text-cyan-200 font-bold mb-4">The Real Taste of Fresh Fish</p>
             <div className="flex gap-4 justify-center flex-wrap">
