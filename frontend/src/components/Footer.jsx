@@ -8,7 +8,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900 text-gray-300 mt-16 overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-gray-900 via-green-950 to-gray-900 text-gray-300 mt-16 overflow-hidden">
       {/* Decorative top wave */}
       <div className="absolute top-0 left-0 right-0 leading-none -translate-y-px">
         <svg
@@ -34,10 +34,10 @@ const Footer = () => {
               />
               <div className="flex flex-col leading-tight">
                 <span className="text-white font-extrabold text-lg">Godawari Fish</span>
-                <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">& Company</span>
+                <span className="text-emerald-400 text-xs font-semibold tracking-widest uppercase">& Company</span>
               </div>
             </div>
-            <p className="text-sm mb-1 italic text-cyan-300">"The Real Taste of Fresh Fish"</p>
+            <p className="text-sm mb-1 italic text-emerald-300">"The Real Taste of Fresh Fish"</p>
           </ScrollReveal>
 
           {/* Our Outlets & Contact */}
@@ -49,7 +49,7 @@ const Footer = () => {
                 <p className="text-sm">Near MGM Hospital, Chhatrapati Sambhajinagar</p>
                 <p className="text-sm">
                   <strong>📞 Phone:</strong>
-                  <a href="tel:9371306189" className="hover:text-cyan-400 transition"> 9371306189</a>
+                  <a href="tel:9371306189" className="hover:text-emerald-400 transition"> 9371306189</a>
                 </p>
               </div>
               <div>
@@ -57,16 +57,16 @@ const Footer = () => {
                 <p className="text-sm">Kumbharwada, Near Bhaji Mandi, Chhatrapati Sambhajinagar</p>
                 <p className="text-sm">
                   <strong>📞 Phone:</strong>
-                  <a href="tel:9890690189" className="hover:text-cyan-400 transition"> 9890690189</a>
+                  <a href="tel:9890690189" className="hover:text-emerald-400 transition"> 9890690189</a>
                 </p>
               </div>
               <p className="text-sm mt-3">
                 <strong>💬 WhatsApp:</strong>
-                <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition"> Chat Now</a>
+                <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition"> Chat Now</a>
               </p>
               <p className="text-sm">
                 <strong>✉️ Email:</strong>
-                <a href="mailto:godawarifish189@gmail.com" className="hover:text-cyan-400 transition"> godawarifish189@gmail.com</a>
+                <a href="mailto:godawarifish189@gmail.com" className="hover:text-emerald-400 transition"> godawarifish189@gmail.com</a>
               </p>
             </div>
           </ScrollReveal>
@@ -103,7 +103,7 @@ const Footer = () => {
         <div className="border-t border-gray-700/50 mt-10 pt-6 text-center text-sm">
           <p className="text-gray-400">
             © 2025{' '}
-            <span className="text-cyan-400 font-semibold">Godawari Fish & Company</span>. All
+            <span className="text-emerald-400 font-semibold">Godawari Fish & Company</span>. All
             rights reserved. | Owner:{' '}
             <span className="text-white">Sameer Qureshi & Brothers</span>
           </p>

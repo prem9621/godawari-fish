@@ -9,21 +9,21 @@ const ServicesSection = () => {
       name: 'Fresh Daily Stock',
       description: 'Fresh catch delivered daily from trusted suppliers',
       icon: Wind,
-      color: 'from-cyan-500 to-blue-500',
+      color: 'from-emerald-500 to-green-500',
     },
     {
       id: 2,
       name: 'Hygienic Processing',
       description: 'Expert cutting and cleaning services available',
       icon: Utensils,
-      color: 'from-blue-500 to-indigo-500',
+      color: 'from-green-500 to-teal-500',
     },
     {
       id: 3,
       name: 'Quality Assurance',
       description: 'Premium quality products with strict quality checks',
       icon: ShieldCheck,
-      color: 'from-indigo-500 to-purple-500',
+      color: 'from-teal-500 to-emerald-500',
     },
   ];
 
@@ -44,13 +44,13 @@ const ServicesSection = () => {
             const IconComponent = service.icon;
             return (
               <ScrollReveal key={service.id} delay={idx * 150}>
-                <div className="group glow-card bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl shadow-md h-full">
+                <div className="group glow-card bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl shadow-md h-full">
                   <div
                     className={`bg-gradient-to-br ${service.color} text-white rounded-2xl w-16 h-16 flex items-center justify-center mb-4 mx-auto shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}
                   >
                     <IconComponent size={32} />
                   </div>
-                  <h3 className="text-xl font-bold text-center mb-3 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-center mb-3 group-hover:text-green-600 transition-colors">
                     {service.name}
                   </h3>
                   <p className="text-center text-gray-700">{service.description}</p>
@@ -61,7 +61,7 @@ const ServicesSection = () => {
         </div>
 
         <ScrollReveal className="mt-16">
-          <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-cyan-600 to-blue-700 p-10 rounded-3xl shadow-2xl animate-gradient">
+          <div className="relative overflow-hidden bg-gradient-to-br from-green-600 via-emerald-600 to-green-700 p-10 rounded-3xl shadow-2xl animate-gradient">
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-4 left-4 w-32 h-32 bg-white rounded-full blur-3xl"></div>
               <div className="absolute bottom-4 right-4 w-40 h-40 bg-yellow-200 rounded-full blur-3xl"></div>
@@ -70,7 +70,7 @@ const ServicesSection = () => {
               <h3 className="text-2xl md:text-3xl font-extrabold mb-3">
                 Custom Cutting & Cleaning Services
               </h3>
-              <p className="text-blue-50/90 mb-8 text-lg">
+              <p className="text-green-50/90 mb-8 text-lg">
                 Hygienic cutting and cleaning available according to your requirements
               </p>
 

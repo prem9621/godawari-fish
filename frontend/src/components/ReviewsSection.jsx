@@ -43,7 +43,7 @@ const ReviewsSection = () => {
   const displayed = showAll ? allReviews : allReviews.slice(0, 6);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-green-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-12">
@@ -55,7 +55,7 @@ const ReviewsSection = () => {
               Customer <span className="gradient-text">Reviews</span>
             </h2>
             <p className="text-gray-600 text-lg mb-4">
-              What our happy customers say about Godawari Fish Mall
+              What our happy customers say about Godavari Fish Mall
             </p>
             {/* Google Rating Badge */}
             <div className="inline-flex items-center gap-3 bg-white border border-yellow-200 px-5 py-3 rounded-2xl shadow-md">
@@ -66,7 +66,7 @@ const ReviewsSection = () => {
               <span className="font-bold text-gray-800">5.0</span>
               <span className="text-gray-500 text-sm">on Google</span>
               <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-                className="text-blue-600 hover:underline text-sm font-semibold flex items-center gap-1">
+                className="text-green-600 hover:underline text-sm font-semibold flex items-center gap-1">
                 See all <ExternalLink size={12} />
               </a>
             </div>
@@ -75,7 +75,7 @@ const ReviewsSection = () => {
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent"></div>
+            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-green-500 border-t-transparent"></div>
           </div>
         ) : (
           <>
@@ -91,7 +91,7 @@ const ReviewsSection = () => {
                       </div>
                     )}
 
-                    <Quote className="absolute top-4 left-4 text-blue-50 group-hover:text-blue-100 transition-colors" size={40} />
+                    <Quote className="absolute top-4 left-4 text-green-50 group-hover:text-green-100 transition-colors" size={40} />
 
                     <div className="flex text-yellow-400 mb-3 relative z-10">
                       {[...Array(review.rating || 5)].map((_, i) => (
@@ -104,7 +104,7 @@ const ReviewsSection = () => {
                     </p>
 
                     <div className="flex items-center gap-3 relative z-10 pt-3 border-t border-gray-100">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                         {review.customer_name?.charAt(0)?.toUpperCase() || 'C'}
                       </div>
                       <p className="text-gray-800 font-semibold text-sm">{review.customer_name}</p>
@@ -118,7 +118,7 @@ const ReviewsSection = () => {
             {allReviews.length > 6 && (
               <div className="text-center mt-8">
                 <button onClick={() => setShowAll(!showAll)}
-                  className="btn-glow bg-white border-2 border-blue-200 text-blue-600 hover:bg-blue-50 px-6 py-2.5 rounded-full font-semibold transition">
+                  className="btn-glow bg-white border-2 border-green-200 text-green-600 hover:bg-green-50 px-6 py-2.5 rounded-full font-semibold transition">
                   {showAll ? 'Show Less' : `Show All ${allReviews.length} Reviews`}
                 </button>
               </div>
@@ -130,7 +130,7 @@ const ReviewsSection = () => {
         <ScrollReveal className="text-center mt-12">
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-              className="btn-glow inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-full font-semibold transition transform hover:scale-105 shadow-lg">
+              className="btn-glow inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-full font-semibold transition transform hover:scale-105 shadow-lg">
               <Star size={18} fill="white" /> View on Google Maps
             </a>
             <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"

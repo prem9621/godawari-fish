@@ -80,7 +80,7 @@ const AdminPanel = () => {
   // ── Login Screen ──────────────────────────────────────
   if (!token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-700 to-blue-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-green-700 to-green-900 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
           <div className="text-center mb-6">
             {/* Logo Container */}
@@ -108,7 +108,7 @@ const AdminPanel = () => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-sm"
                 placeholder="Enter username"
                 required
               />
@@ -119,7 +119,7 @@ const AdminPanel = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 text-sm"
                 placeholder="Enter password"
                 required
               />
@@ -127,7 +127,7 @@ const AdminPanel = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition disabled:opacity-50 text-sm"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-xl transition disabled:opacity-50 text-sm"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
@@ -143,7 +143,7 @@ const AdminPanel = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Header */}
-      <header className="bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-lg sticky top-0 z-40">
+      <header className="bg-gradient-to-r from-green-700 to-green-900 text-white shadow-lg sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
@@ -159,7 +159,7 @@ const AdminPanel = () => {
               </div>
               <div>
                 <h1 className="text-base font-bold leading-tight">Godawari Fish & Company</h1>
-                <p className="text-blue-200 text-xs hidden sm:block">Admin Panel</p>
+                <p className="text-green-200 text-xs hidden sm:block">Admin Panel</p>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@ const AdminPanel = () => {
                 key={id}
                 onClick={() => handleTabChange(id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition ${
-                  activeTab === id ? 'bg-white text-blue-700' : 'text-blue-100 hover:bg-white/10'
+                  activeTab === id ? 'bg-white text-green-700' : 'text-green-100 hover:bg-white/10'
                 }`}
               >
                 <Icon size={15} />
@@ -191,13 +191,13 @@ const AdminPanel = () => {
 
         {/* Mobile dropdown nav */}
         {mobileMenuOpen && (
-          <div className="sm:hidden border-t border-blue-600 bg-blue-800">
+          <div className="sm:hidden border-t border-green-600 bg-green-800">
             {TABS.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
                 onClick={() => handleTabChange(id)}
                 className={`w-full flex items-center gap-3 px-5 py-3 text-sm font-semibold transition ${
-                  activeTab === id ? 'bg-white/10 text-white' : 'text-blue-200 hover:bg-white/5'
+                  activeTab === id ? 'bg-white/10 text-white' : 'text-green-200 hover:bg-white/5'
                 }`}
               >
                 <Icon size={18} />

@@ -46,10 +46,10 @@ const WholesalePage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
+      <section className="bg-gradient-to-r from-green-600 to-green-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-2">Wholesale & Bulk Supply</h1>
-          <p className="text-blue-100 text-lg">Premium quality seafood for hotels, restaurants, and businesses</p>
+          <p className="text-green-100 text-lg">Premium quality seafood for hotels, restaurants, and businesses</p>
         </div>
       </section>
 
@@ -89,7 +89,7 @@ const WholesalePage = () => {
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                    <h3 className="font-bold text-lg mb-2 text-blue-600">{item.title}</h3>
+                    <h3 className="font-bold text-lg mb-2 text-green-600">{item.title}</h3>
                     <p className="text-gray-700">{item.description}</p>
                   </div>
                 ))}
@@ -120,7 +120,7 @@ const WholesalePage = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                       placeholder="Your name"
                     />
                   </div>
@@ -132,7 +132,7 @@ const WholesalePage = () => {
                       name="business_name"
                       value={formData.business_name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                       placeholder="Your business name"
                     />
                   </div>
@@ -145,7 +145,7 @@ const WholesalePage = () => {
                       value={formData.mobile}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                       placeholder="10-digit mobile number"
                     />
                   </div>
@@ -157,7 +157,7 @@ const WholesalePage = () => {
                       name="product_requirement"
                       value={formData.product_requirement}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                       placeholder="e.g., Pomfret, Surmai, Prawns"
                     />
                   </div>
@@ -169,7 +169,7 @@ const WholesalePage = () => {
                       name="quantity"
                       value={formData.quantity}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-3 text-base min-h-[44px] border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                       placeholder="e.g., 10 kg, 50 pieces"
                     />
                   </div>
@@ -181,7 +181,7 @@ const WholesalePage = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows="4"
-                      className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                       placeholder="Tell us about your requirements..."
                     ></textarea>
                   </div>
@@ -189,7 +189,7 @@ const WholesalePage = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-50"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-50"
                   >
                     {loading ? 'Submitting...' : 'Submit Inquiry'}
                   </button>
@@ -212,7 +212,7 @@ const WholesalePage = () => {
           </div>
 
           {/* Target Customers */}
-          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-12 rounded-lg mb-16">
+          <div className="bg-gradient-to-r from-green-50 to-green-100 p-12 rounded-lg mb-16">
             <h2 className="text-3xl font-bold mb-8 text-center">We Serve</h2>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
               {[

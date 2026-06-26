@@ -268,7 +268,7 @@ const ProductsTab = ({ token }) => {
                         <button onClick={() => openImageEdit(p)} className="p-3 text-purple-600 hover:bg-purple-50 rounded-xl transition" title="Change Image">
                           <ImageIcon size={20} />
                         </button>
-                        <button onClick={() => openEdit(p)} className="p-3 text-blue-600 hover:bg-blue-50 rounded-xl transition" title="Edit">
+                        <button onClick={() => openEdit(p)} className="p-3 text-green-600 hover:bg-green-50 rounded-xl transition" title="Edit">
                           <Edit2 size={20} />
                         </button>
                         <button onClick={() => handleDelete(p.id)} className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition" title="Delete">
@@ -301,7 +301,7 @@ const ProductsTab = ({ token }) => {
                   <button onClick={() => openImageEdit(p)} className="p-3 text-purple-600 hover:bg-purple-50 rounded-xl transition">
                     <ImageIcon size={20} />
                   </button>
-                  <button onClick={() => openEdit(p)} className="p-3 text-blue-600 hover:bg-blue-50 rounded-xl transition">
+                  <button onClick={() => openEdit(p)} className="p-3 text-green-600 hover:bg-green-50 rounded-xl transition">
                     <Edit2 size={20} />
                   </button>
                   <button onClick={() => handleDelete(p.id)} className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition">
@@ -328,7 +328,7 @@ const ProductsTab = ({ token }) => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Product Image</label>
                 <div
                   onClick={() => fileRef.current.click()}
-                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden mb-3"
+                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-green-400 hover:bg-green-50 transition overflow-hidden mb-3"
                 >
                   {imagePreview ? (
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
@@ -347,7 +347,7 @@ const ProductsTab = ({ token }) => {
                     value={imageUrl}
                     onChange={handleImageUrlChange}
                     placeholder="https://example.com/fish.jpg"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                   />
                 </div>
                 {imagePreview && editProduct && (
@@ -367,7 +367,7 @@ const ProductsTab = ({ token }) => {
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                   placeholder="e.g. Rohu Fish"
                   required
                 />
@@ -378,7 +378,7 @@ const ProductsTab = ({ token }) => {
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm resize-none"
                   rows={3}
                   placeholder="Short description..."
                 />
@@ -390,7 +390,7 @@ const ProductsTab = ({ token }) => {
                 <button type="button" onClick={closeModal} className="flex-1 px-4 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
                   Cancel
                 </button>
-                <button type="submit" disabled={saving} className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                <button type="submit" disabled={saving} className="flex-1 px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
                   {saving && <Loader2 size={18} className="animate-spin" />}
                   {saving ? 'Saving...' : editProduct ? 'Update' : 'Add Product'}
                 </button>
@@ -413,7 +413,7 @@ const ProductsTab = ({ token }) => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">New Product Image</label>
                 <div
                   onClick={() => fileRef.current.click()}
-                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden mb-3"
+                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-green-400 hover:bg-green-50 transition overflow-hidden mb-3"
                 >
                   {imagePreview ? (
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
@@ -432,7 +432,7 @@ const ProductsTab = ({ token }) => {
                     value={imageUrl}
                     onChange={handleImageUrlChange}
                     placeholder="https://example.com/fish.jpg"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                   />
                 </div>
               </div>

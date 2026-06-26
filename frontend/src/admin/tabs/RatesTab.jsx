@@ -146,7 +146,7 @@ const RatesTab = ({ token }) => {
                 {rates.map((r) => (
                   <tr key={r.id} className="border-b border-gray-100 hover:bg-gray-50 transition">
                     <td className="py-3 px-3 font-semibold text-gray-800">{r.name}</td>
-                    <td className="py-3 px-3 text-blue-700 font-bold">₹{r.rate}</td>
+                    <td className="py-3 px-3 text-green-700 font-bold">₹{r.rate}</td>
                     <td className="py-3 px-3 text-gray-500">/{r.unit}</td>
                     <td className="py-3 px-3 text-gray-500">
                       {r.weight != null ? `${r.weight} ${r.weight_unit}` : '—'}
@@ -157,7 +157,7 @@ const RatesTab = ({ token }) => {
                       </span>
                     </td>
                     <td className="py-3 px-3 text-right">
-                      <button onClick={() => openEdit(r)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit">
+                      <button onClick={() => openEdit(r)} className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition" title="Edit">
                         <Edit2 size={16} />
                       </button>
                     </td>
@@ -174,12 +174,12 @@ const RatesTab = ({ token }) => {
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <p className="font-semibold text-gray-800">{r.name}</p>
-                    <p className="text-blue-700 font-bold text-lg">₹{r.rate}<span className="text-gray-400 text-sm font-normal">/{r.unit}</span></p>
+                    <p className="text-green-700 font-bold text-lg">₹{r.rate}<span className="text-gray-400 text-sm font-normal">/{r.unit}</span></p>
                     {r.weight != null && <p className="text-gray-500 text-sm">Stock: {r.weight} {r.weight_unit}</p>}
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <span className={`px-2 py-1 rounded-full text-xs font-semibold ${availColor(r.availability)}`}>{r.availability}</span>
-                    <button onClick={() => openEdit(r)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition">
+                    <button onClick={() => openEdit(r)} className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition">
                       <Edit2 size={15} />
                     </button>
                   </div>
@@ -205,7 +205,7 @@ const RatesTab = ({ token }) => {
                   <select
                     value={form.product_id}
                     onChange={(e) => setForm({ ...form, product_id: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                     required
                   >
                     <option value="">Select product...</option>
@@ -223,7 +223,7 @@ const RatesTab = ({ token }) => {
                     type="number"
                     value={form.rate}
                     onChange={(e) => setForm({ ...form, rate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                     placeholder="0"
                     min="0"
                     step="0.01"
@@ -235,7 +235,7 @@ const RatesTab = ({ token }) => {
                   <select
                     value={form.unit}
                     onChange={(e) => setForm({ ...form, unit: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                   >
                     {UNITS.map((u) => <option key={u} value={u}>{u}</option>)}
                   </select>
@@ -249,7 +249,7 @@ const RatesTab = ({ token }) => {
                     type="number"
                     value={form.weight}
                     onChange={(e) => setForm({ ...form, weight: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                     placeholder="e.g. 50"
                     min="0"
                     step="0.1"
@@ -260,7 +260,7 @@ const RatesTab = ({ token }) => {
                   <select
                     value={form.weight_unit}
                     onChange={(e) => setForm({ ...form, weight_unit: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 text-sm"
                   >
                     {WEIGHT_UNITS.map((u) => <option key={u} value={u}>{u}</option>)}
                   </select>
@@ -295,7 +295,7 @@ const RatesTab = ({ token }) => {
                 <button type="button" onClick={closeModal} className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
                   Cancel
                 </button>
-                <button type="submit" disabled={saving} className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                <button type="submit" disabled={saving} className="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
                   {saving && <Loader2 size={16} className="animate-spin" />}
                   {saving ? 'Saving...' : editRate ? 'Update' : 'Set Rate'}
                 </button>

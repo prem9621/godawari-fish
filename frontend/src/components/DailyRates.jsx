@@ -26,11 +26,11 @@ const DailyRates = () => {
   }, []);
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-b from-white to-green-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="text-center mb-4">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
               <Fish size={16} className="animate-float" />
               Today's Catch
             </div>
@@ -45,7 +45,7 @@ const DailyRates = () => {
 
         {loading ? (
           <div className="text-center text-gray-600 py-12">
-            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent"></div>
+            <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-green-500 border-t-transparent"></div>
             <p className="mt-4">Loading rates...</p>
           </div>
         ) : rates.length === 0 ? (
@@ -70,7 +70,7 @@ const DailyRates = () => {
                     </div>
                   )}
                   <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-green-600 transition-colors">
                       {rate.name}
                     </h3>
 
@@ -91,7 +91,7 @@ const DailyRates = () => {
                     </div>
 
                     {rate.weight != null && Number(rate.weight) > 0 && (
-                      <div className="mb-4 inline-flex items-center gap-1.5 self-start bg-cyan-50 text-cyan-800 px-3 py-1 rounded-full text-xs font-semibold border border-cyan-200">
+                      <div className="mb-4 inline-flex items-center gap-1.5 self-start bg-emerald-50 text-emerald-800 px-3 py-1 rounded-full text-xs font-semibold border border-emerald-200">
                         ⚖️ {rate.weight} {rate.weight_unit || 'kg'} available
                       </div>
                     )}
@@ -112,20 +112,20 @@ const DailyRates = () => {
         )}
 
         <ScrollReveal className="mt-12">
-          <div className="relative overflow-hidden bg-gradient-to-r from-blue-100 to-cyan-100 border-l-4 border-blue-600 p-6 rounded-2xl shadow-md">
+          <div className="relative overflow-hidden bg-gradient-to-r from-green-100 to-emerald-100 border-l-4 border-green-600 p-6 rounded-2xl shadow-md">
             <div className="flex items-start gap-4">
-              <AlertCircle className="text-blue-600 mt-1 flex-shrink-0 animate-float" size={28} />
+              <AlertCircle className="text-green-600 mt-1 flex-shrink-0 animate-float" size={28} />
               <div>
-                <h3 className="font-bold text-blue-900 mb-2 text-lg">
+                <h3 className="font-bold text-green-900 mb-2 text-lg">
                   Need Wholesale Supplies?
                 </h3>
-                <p className="text-blue-800 mb-3">
+                <p className="text-green-800 mb-3">
                   Contact us for bulk orders and wholesale rates. Perfect for hotels,
                   restaurants, and catering services.
                 </p>
                 <a
                   href="/wholesale"
-                  className="text-blue-600 font-semibold hover:underline inline-flex items-center gap-1 group"
+                  className="text-green-600 font-semibold hover:underline inline-flex items-center gap-1 group"
                 >
                   Learn more about wholesale
                   <span className="group-hover:translate-x-1 transition-transform">→</span>

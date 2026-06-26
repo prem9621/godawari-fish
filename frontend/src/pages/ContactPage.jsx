@@ -45,11 +45,11 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-14 animate-gradient relative overflow-hidden">
+      <section className="bg-gradient-to-r from-green-600 to-green-800 text-white py-14 animate-gradient relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <img src="/godawari_logo.png" alt="Godawari Fish & Company" className="h-20 w-auto mx-auto mb-4 drop-shadow-xl animate-float" />
           <h1 className="text-4xl font-bold mb-2">Contact Us</h1>
-          <p className="text-blue-100 text-lg">Godawari Fish & Company – Get in touch for orders or inquiries</p>
+          <p className="text-green-100 text-lg">Godawari Fish & Company – Get in touch for orders or inquiries</p>
         </div>
       </section>
 
@@ -64,10 +64,10 @@ const ContactPage = () => {
 
                 <ScrollReveal>
                   <div className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition hover:-translate-y-1">
-                    <Phone className="text-blue-600 mt-1 flex-shrink-0" size={24} />
+                    <Phone className="text-green-600 mt-1 flex-shrink-0" size={24} />
                     <div>
                       <h3 className="font-bold mb-1">Phone</h3>
-                      <a href="tel:9371306189" className="text-blue-600 hover:underline text-lg font-semibold">9371306189</a>
+                      <a href="tel:9371306189" className="text-green-600 hover:underline text-lg font-semibold">9371306189</a>
                     </div>
                   </div>
                 </ScrollReveal>
@@ -103,7 +103,7 @@ const ContactPage = () => {
                       <p className="text-gray-700">Central Naka, Near MGM Hospital</p>
                       <p className="text-gray-700">Chhatrapati Sambhaji Nagar, Maharashtra</p>
                       <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 mt-2 text-blue-600 hover:underline text-sm font-semibold">
+                        className="inline-flex items-center gap-1 mt-2 text-green-600 hover:underline text-sm font-semibold">
                         <ExternalLink size={13} /> View on Google Maps
                       </a>
                     </div>
@@ -113,8 +113,8 @@ const ContactPage = () => {
 
               {/* Business Hours */}
               <ScrollReveal delay={300}>
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 p-6 rounded-xl shadow-sm">
-                  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-blue-800">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 p-6 rounded-xl shadow-sm">
+                  <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-green-800">
                     <Clock size={20} /> Business Hours
                   </h3>
                   <div className="space-y-3">
@@ -150,29 +150,29 @@ const ContactPage = () => {
                   <div>
                     <label className="block font-semibold mb-2 text-gray-700">Your Name *</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100"
                       placeholder="Your name" />
                   </div>
                   <div>
                     <label className="block font-semibold mb-2 text-gray-700">Email *</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100"
                       placeholder="your@email.com" />
                   </div>
                   <div>
                     <label className="block font-semibold mb-2 text-gray-700">Mobile Number *</label>
                     <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100"
                       placeholder="10-digit mobile number" />
                   </div>
                   <div>
                     <label className="block font-semibold mb-2 text-gray-700">Message *</label>
                     <textarea name="message" value={formData.message} onChange={handleChange} required rows="4"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100"
                       placeholder="Your message..." />
                   </div>
                   <button type="submit" disabled={loading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50 transform hover:scale-105 shadow-md">
+                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50 transform hover:scale-105 shadow-md">
                     {loading ? 'Sending...' : '📨 Send Message'}
                   </button>
                 </form>
@@ -185,13 +185,13 @@ const ContactPage = () => {
 
             {/* Map */}
             <div className="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-xl">
-              <div className="bg-blue-600 text-white px-5 py-3 flex items-center justify-between">
+              <div className="bg-green-600 text-white px-5 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <MapPin size={16} />
                   <span className="font-bold text-sm">Godawari Fish & Company – Find Us</span>
                 </div>
                 <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-                  className="text-xs text-blue-200 hover:text-white flex items-center gap-1">
+                  className="text-xs text-green-200 hover:text-white flex items-center gap-1">
                   Open Maps <ExternalLink size={12} />
                 </a>
               </div>
@@ -209,7 +209,7 @@ const ContactPage = () => {
               <div className="px-5 py-3 bg-gray-50 flex items-center justify-between border-t">
                 <span className="text-xs text-gray-600">Central Naka, Near MGM Hospital, Chhatrapati Sambhaji Nagar</span>
                 <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-                  className="text-blue-600 text-xs font-semibold hover:underline">
+                  className="text-green-600 text-xs font-semibold hover:underline">
                   Get Directions →
                 </a>
               </div>
@@ -242,13 +242,13 @@ const ContactPage = () => {
                 </p>
 
                 <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-                  className="w-full btn-glow bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-5 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-md text-center flex items-center justify-center gap-2">
+                  className="w-full btn-glow bg-gradient-to-r from-green-600 to-emerald-600 text-white px-5 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-md text-center flex items-center justify-center gap-2">
                   <Star size={16} fill="white" />
                   Read All Reviews
                 </a>
 
                 <a href={GOOGLE_MAPS_LINK} target="_blank" rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline text-sm font-semibold flex items-center gap-1">
+                  className="text-green-600 hover:underline text-sm font-semibold flex items-center gap-1">
                   ✏️ Write a Review
                 </a>
 

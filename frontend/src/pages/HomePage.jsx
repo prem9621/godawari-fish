@@ -18,7 +18,7 @@ const SplashScreen = ({ onDone }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-blue-700 via-cyan-600 to-blue-900 transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-green-700 via-emerald-600 to-green-900 transition-opacity duration-500 ${
         hide ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
@@ -33,7 +33,7 @@ const SplashScreen = ({ onDone }) => {
           <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow-lg">
             Godawari Fish
           </h1>
-          <p className="text-cyan-200 font-bold text-xl tracking-widest uppercase mt-1">
+          <p className="text-emerald-200 font-bold text-xl tracking-widest uppercase mt-1">
             & Company
           </p>
           <p className="text-white/80 text-lg mt-3 italic">
@@ -44,7 +44,7 @@ const SplashScreen = ({ onDone }) => {
           {[0,1,2].map(i => (
             <span
               key={i}
-              className="w-2 h-2 bg-cyan-300 rounded-full animate-pulse"
+              className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse"
               style={{ animationDelay: `${i * 0.2}s` }}
             />
           ))}
@@ -69,7 +69,7 @@ const HomePage = () => {
       {!splashDone && <SplashScreen onDone={handleSplashDone} />}
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 text-white py-24 animate-gradient">
+      <section className="relative overflow-hidden bg-gradient-to-r from-green-600 via-emerald-500 to-green-700 text-white py-24 animate-gradient">
         <BubbleBackground count={22} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -83,7 +83,7 @@ const HomePage = () => {
                 />
                 <div>
                   <h2 className="text-2xl font-extrabold text-white">Godawari Fish</h2>
-                  <p className="text-cyan-200 font-semibold text-sm tracking-widest uppercase">& Company</p>
+                  <p className="text-emerald-200 font-semibold text-sm tracking-widest uppercase">& Company</p>
                   <p className="text-white/80 text-sm italic mt-1">"The Real Taste of Fresh Fish"</p>
                 </div>
               </div>
@@ -98,7 +98,7 @@ const HomePage = () => {
                   Quality Seafood
                 </span>
               </h1>
-              <p className="text-xl mb-8 text-blue-50/90 leading-relaxed">
+              <p className="text-xl mb-8 text-green-50/90 leading-relaxed">
                 Chhatrapati Sambhajinagar's trusted partner for bulk restaurant supply and fresh home delivery. Premium seafood solutions for restaurants, catering events, and daily home delivery.
               </p>
 
@@ -130,13 +130,13 @@ const HomePage = () => {
             </div>
 
             <ScrollReveal className="relative slide-right" delay={200}>
-              <div className="absolute -inset-4 bg-gradient-to-br from-cyan-300/40 to-blue-500/40 rounded-3xl blur-2xl animate-pulse-glow"></div>
-              <div className="relative bg-gradient-to-br from-blue-500/90 to-cyan-600/90 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-2xl hover-wiggle">
+              <div className="absolute -inset-4 bg-gradient-to-br from-emerald-300/40 to-green-500/40 rounded-3xl blur-2xl animate-pulse-glow"></div>
+              <div className="relative bg-gradient-to-br from-green-500/90 to-emerald-600/90 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-2xl hover-wiggle">
                 <p className="text-2xl font-bold mb-6 flex items-center gap-2">
                   <Sparkles size={22} className="text-yellow-300 animate-float" />
                   Why Choose Us?
                 </p>
-                <ul className="space-y-3 text-blue-50">
+                <ul className="space-y-3 text-green-50">
                   {[
                     '🥇 39+ Years of Trust',
                     '🏆 Chhatrapati Sambhajinagar\'s Top Reputed Supplier',
@@ -201,7 +201,7 @@ const HomePage = () => {
           </div>
           <a
             href="/shop"
-            className="btn-glow bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-lg whitespace-nowrap"
+            className="btn-glow bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-lg whitespace-nowrap"
           >
             View All Fish →
           </a>
@@ -218,7 +218,7 @@ const HomePage = () => {
       <ReviewsSection />
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden py-20 bg-gradient-to-br from-blue-600 via-cyan-600 to-blue-800 text-white animate-gradient">
+      <section className="relative overflow-hidden py-20 bg-gradient-to-br from-green-600 via-emerald-600 to-green-800 text-white animate-gradient">
         <BubbleBackground count={14} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <ScrollReveal>
@@ -228,7 +228,7 @@ const HomePage = () => {
                 Fresh Fish?
               </span>
             </h2>
-            <p className="text-xl mb-8 text-blue-50/90">
+            <p className="text-xl mb-8 text-green-50/90">
               Contact Godawari Fish & Company on WhatsApp or call to place your order
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
@@ -242,7 +242,7 @@ const HomePage = () => {
               </a>
               <a
                 href="tel:9371306189"
-                className="btn-glow ripple bg-white hover:bg-gray-100 text-blue-600 px-8 py-3.5 rounded-full font-semibold transition transform hover:scale-110 shadow-xl"
+                className="btn-glow ripple bg-white hover:bg-gray-100 text-green-600 px-8 py-3.5 rounded-full font-semibold transition transform hover:scale-110 shadow-xl"
               >
                 📞 Call 9371306189
               </a>

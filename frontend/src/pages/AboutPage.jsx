@@ -35,12 +35,12 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 sm:py-12">
+      <section className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-800 text-white py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-2">
             Godawari Fish: A Legacy of Trust, Quality, and Generations
           </h1>
-          <p className="text-blue-100 text-base sm:text-lg">
+          <p className="text-green-100 text-base sm:text-lg">
             Delivering Freshness from Godavari to Your Kitchen Since 1985
           </p>
         </div>
@@ -51,7 +51,7 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Our Story */}
           <ScrollReveal className="mb-12 sm:mb-16">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
               <Sparkles size={16} />
               Our Story: A Teacher’s Vision, An Unwavering Trust
             </div>
@@ -74,7 +74,7 @@ const AboutPage = () => {
           {/* Timeline */}
           <ScrollReveal className="mb-12 sm:mb-16" delay={150}>
             <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center">
-              The Timeline of Our <span className="text-blue-600">Growth</span>
+              The Timeline of Our <span className="text-green-600">Growth</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[
@@ -84,8 +84,8 @@ const AboutPage = () => {
                 { year: '2012', event: 'Sameer Qureshi revolutionized the market by introducing frozen and imported seafood (Norwegian Salmon, Japanese Tuna, Vietnamese Basa, and Export-Quality Prawns).' },
                 { year: '2016', event: 'Zaheer Qureshi inaugurated a new branch in the Satara area (Beed Bypass Road) to better serve our customers.' },
               ].map((item, idx) => (
-                <div key={idx} className="bg-gradient-to-br from-blue-50 to-blue-100 p-5 sm:p-6 rounded-xl border border-blue-200">
-                  <h3 className="font-bold text-lg sm:text-xl text-blue-700 mb-2">{item.year}</h3>
+                <div key={idx} className="bg-gradient-to-br from-green-50 to-green-100 p-5 sm:p-6 rounded-xl border border-green-200">
+                  <h3 className="font-bold text-lg sm:text-xl text-green-700 mb-2">{item.year}</h3>
                   <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{item.event}</p>
                 </div>
               ))}
@@ -94,23 +94,23 @@ const AboutPage = () => {
 
           {/* Quick Highlights */}
           <ScrollReveal className="mb-12 sm:mb-16" delay={300}>
-            <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 sm:p-8 md:p-10 rounded-2xl">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 sm:p-8 md:p-10 rounded-2xl">
               <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center">
-                Quick <span className="text-blue-600">Highlights</span>
+                Quick <span className="text-green-600">Highlights</span>
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 <div className="bg-white p-5 sm:p-6 rounded-xl shadow-md text-center">
-                  <Clock className="mx-auto text-blue-600 mb-3" size={32} />
+                  <Clock className="mx-auto text-green-600 mb-3" size={32} />
                   <h4 className="font-bold text-base sm:text-lg mb-1">Established</h4>
                   <p className="text-gray-700 text-sm sm:text-base">1985</p>
                 </div>
                 <div className="bg-white p-5 sm:p-6 rounded-xl shadow-md text-center">
-                  <Users className="mx-auto text-blue-600 mb-3" size={32} />
+                  <Users className="mx-auto text-green-600 mb-3" size={32} />
                   <h4 className="font-bold text-base sm:text-lg mb-1">Generations</h4>
                   <p className="text-gray-700 text-sm sm:text-base">3rd Generation Strong</p>
                 </div>
                 <div className="bg-white p-5 sm:p-6 rounded-xl shadow-md text-center">
-                  <TrendingUp className="mx-auto text-blue-600 mb-3" size={32} />
+                  <TrendingUp className="mx-auto text-green-600 mb-3" size={32} />
                   <h4 className="font-bold text-base sm:text-lg mb-1">Mission</h4>
                   <p className="text-gray-700 text-sm sm:text-base">Delivering Freshness from Godavari to Your Kitchen</p>
                 </div>
@@ -121,7 +121,7 @@ const AboutPage = () => {
           {/* Our Services */}
           <ScrollReveal className="mb-12 sm:mb-16" delay={450}>
             <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center">
-              Our <span className="text-blue-600">Services</span>
+              Our <span className="text-green-600">Services</span>
             </h2>
             <p className="text-center text-gray-700 text-sm sm:text-base mb-6 sm:mb-8 max-w-3xl mx-auto">
               We don't just sell fish; we cater to the vital needs of Aurangabad.
@@ -134,7 +134,7 @@ const AboutPage = () => {
                 { icon: Building2, title: 'Institutional Supply', description: 'Proud suppliers to the Siddharth Garden wildlife.' },
               ].map((item, idx) => (
                 <div key={idx} className="bg-white p-5 sm:p-6 rounded-xl shadow-md border border-gray-100 text-center">
-                  <item.icon className="mx-auto text-blue-600 mb-3" size={32} />
+                  <item.icon className="mx-auto text-green-600 mb-3" size={32} />
                   <h4 className="font-bold text-base sm:text-lg mb-2">{item.title}</h4>
                   <p className="text-gray-700 text-sm leading-relaxed">{item.description}</p>
                 </div>
@@ -144,11 +144,11 @@ const AboutPage = () => {
 
           {/* Stepping into the Future */}
           <ScrollReveal className="mb-12 sm:mb-16" delay={600}>
-            <div className="bg-gradient-to-r from-blue-700 to-cyan-800 p-6 sm:p-8 md:p-10 rounded-2xl text-white">
+            <div className="bg-gradient-to-r from-green-700 to-emerald-800 p-6 sm:p-8 md:p-10 rounded-2xl text-white">
               <h2 className="text-2xl sm:text-3xl font-extrabold mb-4 sm:mb-6 text-center">
-                Stepping into the <span className="text-cyan-200">Future</span>
+                Stepping into the <span className="text-emerald-200">Future</span>
               </h2>
-              <p className="text-center text-blue-50 text-sm sm:text-base leading-relaxed">
+              <p className="text-center text-green-50 text-sm sm:text-base leading-relaxed">
                 As of 2026-27, our third generation—Tausif Qureshi, Shahbaz Khan, Adil Qureshi, and Uzair Nasir Qureshi—is taking this legacy to new heights. By 2028, our goal is to strengthen our network by expanding with 5 to 6 new branches not just within the city, but also in other cities beyond Aurangabad.
               </p>
             </div>
@@ -158,8 +158,8 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start mb-12 sm:mb-16">
             <ScrollReveal>
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-300/40 to-blue-500/40 rounded-3xl blur-2xl pointer-events-none"></div>
-                <div className="relative bg-gradient-to-br from-blue-500/95 to-cyan-600/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-white/20 shadow-2xl text-white">
+                <div className="absolute -inset-4 bg-gradient-to-br from-emerald-300/40 to-green-500/40 rounded-3xl blur-2xl pointer-events-none"></div>
+                <div className="relative bg-gradient-to-br from-green-500/95 to-emerald-600/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-white/20 shadow-2xl text-white">
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
                     <div className="relative flex-shrink-0">
                       <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-white/30 shadow-xl bg-white/15 flex items-center justify-center">
@@ -189,11 +189,11 @@ const AboutPage = () => {
                       <h3 className="text-xl sm:text-2xl font-extrabold mb-1">
                         {ownerName}
                       </h3>
-                      <p className="text-cyan-100 text-sm font-semibold mb-3">
+                      <p className="text-emerald-100 text-sm font-semibold mb-3">
                         {ownerRole}
                       </p>
                       {ownerBio && (
-                        <p className="text-blue-50/90 text-sm leading-relaxed">
+                        <p className="text-green-50/90 text-sm leading-relaxed">
                           {ownerBio}
                         </p>
                       )}
@@ -204,8 +204,8 @@ const AboutPage = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={150}>
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 sm:p-8 rounded-2xl border border-blue-200">
-                <h4 className="font-bold text-lg sm:text-xl text-blue-800 mb-4">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 sm:p-8 rounded-2xl border border-green-200">
+                <h4 className="font-bold text-lg sm:text-xl text-green-800 mb-4">
                   A Note from the Founder’s Desk
                 </h4>
                 <div className="text-gray-700 text-sm sm:text-base leading-relaxed italic space-y-4">
@@ -215,7 +215,7 @@ const AboutPage = () => {
                   <p>
                     "As we continue to grow beyond Aurangabad, our goal remains simple: to serve you with the same integrity and excellence that started on a small street corner decades ago. Thank you for making us a part of your homes and celebrations."
                   </p>
-                  <p className="font-semibold text-right mt-4 not-italic text-blue-800">
+                  <p className="font-semibold text-right mt-4 not-italic text-green-800">
                     — Sameer Qureshi<br />
                     <span className="text-sm">Director, Godawari Fish</span>
                   </p>
@@ -264,14 +264,14 @@ const AboutPage = () => {
 
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
-                  <MapPin className="text-blue-600" />
+                  <MapPin className="text-green-600" />
                   Central Naka, Near MGM Hospital
                 </h3>
                 <p className="text-gray-700 mb-4 text-sm sm:text-base">
                   Chhatrapati Sambhaji Nagar, Maharashtra
                 </p>
 
-                <div className="bg-blue-50 p-5 sm:p-6 rounded-xl mb-6">
+                <div className="bg-green-50 p-5 sm:p-6 rounded-xl mb-6">
                   <h4 className="font-bold text-base sm:text-lg mb-3 sm:mb-4">
                     Business Hours
                   </h4>
@@ -286,7 +286,7 @@ const AboutPage = () => {
                   href="https://www.google.com/maps/search/Godavari+Fish"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-glow inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition transform hover:scale-105 shadow-md"
+                  className="btn-glow inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-semibold transition transform hover:scale-105 shadow-md"
                 >
                   Get Directions
                 </a>

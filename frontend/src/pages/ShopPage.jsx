@@ -90,8 +90,8 @@ const getCatalogueInfo = (name) =>
     name.toLowerCase().includes(f.name.toLowerCase().split(' ')[0])
   ) || { category: 'Sea Fish', emoji: '🐟', benefits: 'Fresh and nutritious.', description: 'Fresh quality fish available daily.' };
 
-const categoryColor = (cat) => ({ 'Sea Fish': 'bg-blue-100 text-blue-700', 'Seafood': 'bg-cyan-100 text-cyan-700', 'Fresh Water': 'bg-green-100 text-green-700' }[cat] || 'bg-gray-100 text-gray-700');
-const categoryBar = (cat) => ({ 'Sea Fish': 'bg-gradient-to-r from-blue-500 to-cyan-400', 'Seafood': 'bg-gradient-to-r from-cyan-500 to-teal-400', 'Fresh Water': 'bg-gradient-to-r from-green-500 to-emerald-400' }[cat] || 'bg-blue-400');
+const categoryColor = (cat) => ({ 'Sea Fish': 'bg-green-100 text-green-700', 'Seafood': 'bg-emerald-100 text-emerald-700', 'Fresh Water': 'bg-green-100 text-green-700' }[cat] || 'bg-gray-100 text-gray-700');
+const categoryBar = (cat) => ({ 'Sea Fish': 'bg-gradient-to-r from-green-500 to-emerald-400', 'Seafood': 'bg-gradient-to-r from-emerald-500 to-teal-400', 'Fresh Water': 'bg-gradient-to-r from-green-500 to-emerald-400' }[cat] || 'bg-green-400');
 const googleSearchUrl = (name) => `https://www.google.com/search?q=${encodeURIComponent(name + ' fish health benefits price how to cook')}`;
 
 const FishCard = ({ product }) => {
@@ -106,7 +106,7 @@ const FishCard = ({ product }) => {
   return (
     <div className={`bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden glow-card ${!isAvailable ? 'opacity-60' : ''}`}>
       <div className={`h-1.5 w-full ${categoryBar(info.category)}`} />
-      <div className="relative overflow-hidden h-44 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+      <div className="relative overflow-hidden h-44 bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
         {imageUrl ? (
           <img src={imageUrl} alt={product.name} onError={() => setImgError(true)} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
         ) : (
@@ -135,17 +135,17 @@ const FishCard = ({ product }) => {
           <div className="flex flex-wrap gap-1.5">
             {WEIGHT_OPTIONS.map(w => (
               <button key={w} onClick={() => setSelectedWeight(w)}
-                className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition ${selectedWeight === w ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-600 border-gray-300 hover:border-blue-400'}`}>{w}</button>
+                className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition ${selectedWeight === w ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-600 border-gray-300 hover:border-green-400'}`}>{w}</button>
             ))}
           </div>
         </div>
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-xs text-gray-400">Rate per {product.unit || 'kg'}</p>
-            {hasRate ? <p className="text-2xl font-extrabold text-blue-600">₹{product.rate}</p> : <p className="text-sm font-semibold text-amber-600">Contact for Rate</p>}
+            {hasRate ? <p className="text-2xl font-extrabold text-green-600">₹{product.rate}</p> : <p className="text-sm font-semibold text-amber-600">Contact for Rate</p>}
           </div>
           {product.weight && Number(product.weight) > 0 && (
-            <span className="text-xs bg-cyan-50 text-cyan-700 border border-cyan-200 px-2 py-1 rounded-full font-semibold">⚖️ {product.weight} {product.weight_unit || 'kg'}</span>
+            <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-1 rounded-full font-semibold">⚖️ {product.weight} {product.weight_unit || 'kg'}</span>
           )}
         </div>
         <div className="flex gap-2 mt-auto">
@@ -172,7 +172,7 @@ const StaticFishCard = ({ fish }) => {
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden glow-card">
       <div className={`h-1.5 w-full ${categoryBar(fish.category)}`} />
-      <div className="relative overflow-hidden h-44 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+      <div className="relative overflow-hidden h-44 bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
         {imageUrl ? (
           <img src={imageUrl} alt={fish.name} onError={() => setImgError(true)} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
         ) : (
@@ -198,7 +198,7 @@ const StaticFishCard = ({ fish }) => {
           <div className="flex flex-wrap gap-1.5">
             {WEIGHT_OPTIONS.map(w => (
               <button key={w} onClick={() => setSelectedWeight(w)}
-                className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition ${selectedWeight === w ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-600 border-gray-300 hover:border-blue-400'}`}>{w}</button>
+                className={`px-2.5 py-1 rounded-full text-xs font-semibold border transition ${selectedWeight === w ? 'bg-green-600 text-white border-green-600' : 'bg-white text-gray-600 border-gray-300 hover:border-green-400'}`}>{w}</button>
             ))}
           </div>
         </div>
@@ -256,13 +256,13 @@ const ShopPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700 text-white py-16 animate-gradient">
+      <section className="relative overflow-hidden bg-gradient-to-r from-green-600 via-emerald-500 to-green-700 text-white py-16 animate-gradient">
         <BubbleBackground count={15} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
           <img src="/godawari_logo.png" alt="Godawari Fish & Company" className="h-20 w-auto mx-auto mb-4 drop-shadow-xl animate-float" />
           <h1 className="text-4xl md:text-5xl font-extrabold mb-3">Our Fish Menu</h1>
-          <p className="text-blue-100 text-lg mb-1">Godawari Fish & Company – 40+ Varieties</p>
-          <p className="text-cyan-200 text-sm italic">"The Real Taste of Fresh Fish"</p>
+          <p className="text-green-100 text-lg mb-1">Godawari Fish & Company – 40+ Varieties</p>
+          <p className="text-emerald-200 text-sm italic">"The Real Taste of Fresh Fish"</p>
           {lastUpdated && <p className="text-white/60 text-xs mt-2">Rates updated: {lastUpdated.toLocaleTimeString()}</p>}
         </div>
       </section>
@@ -272,17 +272,17 @@ const ShopPage = () => {
           <div className="relative flex-1 w-full">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input type="text" placeholder="Search fish..." value={search} onChange={e => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-blue-500 text-sm" />
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-green-500 text-sm" />
           </div>
           <div className="flex gap-2 flex-wrap justify-center">
             {categories.map(cat => (
               <button key={cat} onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${activeCategory === cat ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${activeCategory === cat ? 'bg-green-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
                 {cat === 'All' ? '🐟 All' : cat === 'Sea Fish' ? '🌊 Sea Fish' : cat === 'Seafood' ? '🦐 Seafood' : '🏞️ Fresh Water'}
               </button>
             ))}
           </div>
-          <button onClick={fetchProducts} className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-semibold whitespace-nowrap">
+          <button onClick={fetchProducts} className="flex items-center gap-1 text-xs text-green-600 hover:text-green-800 font-semibold whitespace-nowrap">
             <RefreshCw size={13} /> Refresh
           </button>
         </div>
@@ -300,7 +300,7 @@ const ShopPage = () => {
 
           {loading ? (
             <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent"></div>
+              <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-green-500 border-t-transparent"></div>
               <p className="mt-4 text-gray-500">Loading fish menu...</p>
             </div>
           ) : totalCount === 0 ? (
@@ -332,13 +332,13 @@ const ShopPage = () => {
             </>
           )}
 
-          <div className="mt-14 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white text-center shadow-xl">
+          <div className="mt-14 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl">
             <h3 className="text-2xl font-extrabold mb-2">Want Bulk / Wholesale Order?</h3>
-            <p className="text-blue-100 mb-6">Special rates for hotels, restaurants & catering!</p>
+            <p className="text-green-100 mb-6">Special rates for hotels, restaurants & catering!</p>
             <div className="flex gap-4 justify-center flex-wrap">
               <a href="https://wa.me/919371306189" target="_blank" rel="noopener noreferrer"
                 className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-lg">💬 WhatsApp Order</a>
-              <a href="tel:9371306189" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-lg">📞 Call Now</a>
+              <a href="tel:9371306189" className="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 rounded-full font-bold transition transform hover:scale-105 shadow-lg">📞 Call Now</a>
             </div>
           </div>
         </div>
