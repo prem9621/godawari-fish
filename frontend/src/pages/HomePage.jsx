@@ -72,9 +72,9 @@ const HomePage = () => {
   const videoRefs = useRef([]);
 
   const videos = [
-    "https://cdn.pixabay.com/video/2024/08/18/227132_medium.mp4?download",
-    "https://cdn.pixabay.com/video/2024/08/18/227128_medium.mp4?download",
-    "https://cdn.pixabay.com/video/2019/03/31/22476-328008668_medium.mp4?download"
+    "https://cdn.pixabay.com/video/2024/08/18/227132_medium.mp4",
+    "https://cdn.pixabay.com/video/2024/08/18/227128_medium.mp4",
+    "https://cdn.pixabay.com/video/2019/03/31/22476-328008668_medium.mp4"
   ];
 
   const handleVideoEnd = () => {
