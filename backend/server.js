@@ -272,10 +272,17 @@ app.get('/api/products/:id', (req, res) => {
 
 app.post('/api/products', verifyToken, upload.single('image'), (req, res) => {
   const { name, description } = req.body;
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
   if (!name) {
     return res.status(400).json({ error: 'Product name required' });
+  }
+
+  // Check if we have an image URL or uploaded file
+  let imageUrl = null;
+  if (req.file) {
+    imageUrl = `/uploads/${req.file.filename}`;
+  } else if (req.body.image_url) {
+    imageUrl = req.body.image_url;
   }
 
   db.run(
@@ -300,7 +307,13 @@ app.put('/api/products/:id', verifyToken, upload.single('image'), (req, res) => 
     if (err) return res.status(500).json({ error: 'Database error' });
     if (!product) return res.status(404).json({ error: 'Product not found' });
 
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : product.image_url;
+    // Determine new image URL: prioritize file upload, then req.body.image_url, then keep existing
+    let imageUrl = product.image_url;
+    if (req.file) {
+      imageUrl = `/uploads/${req.file.filename}`;
+    } else if (req.body.image_url) {
+      imageUrl = req.body.image_url;
+    }
 
     db.run(
       'UPDATE products SET name = ?, description = ?, image_url = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',

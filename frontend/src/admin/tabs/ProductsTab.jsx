@@ -15,6 +15,7 @@ const ProductsTab = ({ token }) => {
   const [imageEditProduct, setImageEditProduct] = useState(null);
   const [form, setForm] = useState(emptyForm);
   const [imageFile, setImageFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
   const [imagePreview, setImagePreview] = useState('');
   const [deleteId, setDeleteId] = useState(null);
   const fileRef = useRef();
@@ -27,6 +28,7 @@ const ProductsTab = ({ token }) => {
       setProducts(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error('Error loading products:', err);
+      // If we get an error, check if it's 401 - token invalid. We'll let the parent handle it by checking localStorage change
       setError(err.message || 'Failed to load products. Please refresh.');
     } finally {
       setLoading(false);
@@ -39,6 +41,7 @@ const ProductsTab = ({ token }) => {
     setEditProduct(null);
     setForm(emptyForm);
     setImageFile(null);
+    setImageUrl('');
     setImagePreview('');
     setShowModal(true);
   };
@@ -47,6 +50,7 @@ const ProductsTab = ({ token }) => {
     setEditProduct(p);
     setForm({ name: p.name, description: p.description || '' });
     setImageFile(null);
+    setImageUrl(p.image_url || '');
     setImagePreview(resolveImageUrl(p.image_url) || '');
     setShowModal(true);
   };
@@ -54,6 +58,7 @@ const ProductsTab = ({ token }) => {
   const openImageEdit = (p) => {
     setImageEditProduct(p);
     setImageFile(null);
+    setImageUrl(p.image_url || '');
     setImagePreview(resolveImageUrl(p.image_url) || '');
     setShowImageModal(true);
   };
@@ -62,19 +67,25 @@ const ProductsTab = ({ token }) => {
     setShowImageModal(false);
     setImageEditProduct(null);
     setImageFile(null);
+    setImageUrl('');
     setImagePreview('');
   };
 
   const handleSaveImage = async (e) => {
     e.preventDefault();
-    if (!imageFile || !imageEditProduct) return;
+    if ((!imageFile && !imageUrl) || !imageEditProduct) return;
     setSaving(true);
     setError('');
     try {
       const fd = new FormData();
       fd.append('name', imageEditProduct.name);
       fd.append('description', imageEditProduct.description || '');
-      fd.append('image', imageFile);
+      if (imageFile) {
+        fd.append('image', imageFile);
+      }
+      if (imageUrl && !imageFile) {
+        fd.append('image_url', imageUrl);
+      }
       
       await api.updateProduct(imageEditProduct.id, fd, token);
       closeImageModal();
@@ -92,6 +103,7 @@ const ProductsTab = ({ token }) => {
     setEditProduct(null);
     setForm(emptyForm);
     setImageFile(null);
+    setImageUrl('');
     setImagePreview('');
   };
 
@@ -99,7 +111,23 @@ const ProductsTab = ({ token }) => {
     const file = e.target.files[0];
     if (!file) return;
     setImageFile(file);
+    setImageUrl('');
     setImagePreview(URL.createObjectURL(file));
+  };
+
+  const handleImageUrlChange = (e) => {
+    const url = e.target.value;
+    setImageUrl(url);
+    setImageFile(null);
+    if (url) {
+      setImagePreview(url);
+    } else if (imageEditProduct) {
+      setImagePreview(resolveImageUrl(imageEditProduct.image_url) || '');
+    } else if (editProduct) {
+      setImagePreview(resolveImageUrl(editProduct.image_url) || '');
+    } else {
+      setImagePreview('');
+    }
   };
 
   const handleSave = async (e) => {
@@ -112,6 +140,7 @@ const ProductsTab = ({ token }) => {
       fd.append('name', form.name.trim());
       fd.append('description', form.description.trim());
       if (imageFile) fd.append('image', imageFile);
+      if (imageUrl && !imageFile) fd.append('image_url', imageUrl);
 
       if (editProduct) {
         await api.updateProduct(editProduct.id, fd, token);
@@ -157,6 +186,11 @@ const ProductsTab = ({ token }) => {
         throw new Error(`API not responding. Make sure backend server is running locally! ${response.status} ${response.statusText}`);
       }
       
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken');
+        throw new Error('Invalid token - please log in again');
+      }
+
       if (data.error) throw new Error(data.error);
       alert(data.message);
       await load();
@@ -289,12 +323,12 @@ const ProductsTab = ({ token }) => {
               <button onClick={closeModal} className="p-1 hover:bg-gray-100 rounded-lg transition"><X size={20} /></button>
             </div>
             <form onSubmit={handleSave} className="px-6 py-5 space-y-4">
-              {/* Image upload */}
+              {/* Image upload or URL */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Product Image</label>
                 <div
                   onClick={() => fileRef.current.click()}
-                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
+                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden mb-3"
                 >
                   {imagePreview ? (
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
@@ -306,10 +340,20 @@ const ProductsTab = ({ token }) => {
                   )}
                 </div>
                 <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+                <div className="mt-2">
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Or paste image URL:</label>
+                  <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={handleImageUrlChange}
+                    placeholder="https://example.com/fish.jpg"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                  />
+                </div>
                 {imagePreview && editProduct && (
                   <button 
                     type="button"
-                    onClick={() => { setImageFile(null); setImagePreview(resolveImageUrl(editProduct.image_url) || ''); }}
+                    onClick={() => { setImageFile(null); setImageUrl(''); setImagePreview(resolveImageUrl(editProduct.image_url) || ''); }}
                     className="mt-3 text-sm text-gray-500 hover:text-gray-700 underline"
                   >
                     Keep original image
@@ -369,7 +413,7 @@ const ProductsTab = ({ token }) => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">New Product Image</label>
                 <div
                   onClick={() => fileRef.current.click()}
-                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden"
+                  className="border-2 border-dashed border-gray-300 rounded-2xl h-48 flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition overflow-hidden mb-3"
                 >
                   {imagePreview ? (
                     <img src={imagePreview} alt="preview" className="w-full h-full object-cover" />
@@ -381,6 +425,16 @@ const ProductsTab = ({ token }) => {
                   )}
                 </div>
                 <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+                <div className="mt-2">
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Or paste image URL:</label>
+                  <input
+                    type="text"
+                    value={imageUrl}
+                    onChange={handleImageUrlChange}
+                    placeholder="https://example.com/fish.jpg"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
+                  />
+                </div>
               </div>
 
               {error && <p className="text-red-600 text-sm">{error}</p>}
@@ -389,7 +443,7 @@ const ProductsTab = ({ token }) => {
                 <button type="button" onClick={closeImageModal} className="flex-1 px-4 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition text-sm font-semibold">
                   Cancel
                 </button>
-                <button type="submit" disabled={saving || !imageFile} className="flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-xl transition text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                <button type="submit" disabled={saving || (!imageFile && !imageUrl)} className="flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-xl transition text-sm font-semibold flex items-center justify-center gap-2">
                   {saving && <Loader2 size={18} className="animate-spin" />}
                   {saving ? 'Saving...' : 'Update Image'}
                 </button>
