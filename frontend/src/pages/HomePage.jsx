@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, Sparkles, ArrowRight, Star } from 'lucide-react';
 import DailyRates from '../components/DailyRates';
 import ReviewsSection from '../components/ReviewsSection';
@@ -68,6 +68,24 @@ const HomePage = () => {
   const [splashDone, setSplashDone] = useState(
     () => sessionStorage.getItem('splashShown') === 'true'
   );
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videoRefs = useRef([]);
+
+  const videos = [
+    "https://cdn.pixabay.com/video/2024/08/18/227132_medium.mp4?download",
+    "https://cdn.pixabay.com/video/2024/08/18/227128_medium.mp4?download"
+  ];
+
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+  };
+
+  useEffect(() => {
+    const currentVideo = videoRefs.current[currentVideoIndex];
+    if (currentVideo) {
+      currentVideo.play();
+    }
+  }, [currentVideoIndex]);
 
   const handleSplashDone = () => {
     sessionStorage.setItem('splashShown', 'true');
@@ -97,18 +115,24 @@ const HomePage = () => {
     <div className="min-h-screen bg-white">
       {!splashDone && <SplashScreen onDone={handleSplashDone} />}
 
-      {/* Hero Section with Video */}
+      {/* Hero Section with Video Slider */}
       <section className="relative overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-[60vh] md:h-[75vh] object-cover"
-        >
-          <source src="https://pixabay.com/videos/download/x-227128_medium.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+        {videos.map((src, index) => (
+          <video
+            key={index}
+            ref={(el) => (videoRefs.current[index] = el)}
+            autoPlay={index === 0}
+            muted
+            playsInline
+            onEnded={handleVideoEnd}
+            className={`w-full h-[60vh] md:h-[75vh] object-cover absolute top-0 left-0 transition-opacity duration-1000 ${
+              index === currentVideoIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-20" />
       </section>
 
       {/* About Section */}
