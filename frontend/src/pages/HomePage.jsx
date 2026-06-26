@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Phone, Sparkles, ArrowRight, Star } from 'lucide-react';
+import { MessageCircle, Sparkles, ArrowRight, Star } from 'lucide-react';
 import DailyRates from '../components/DailyRates';
 import ReviewsSection from '../components/ReviewsSection';
 import ServicesSection from '../components/ServicesSection';
@@ -40,6 +40,51 @@ const SplashScreen = ({ onDone }) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const FISH_CATALOGUE = [
+  { name: 'Prawn', category: 'Sea Fish', emoji: '🦐', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Penaeus_monodon_-_Ratnagiri.jpg/320px-Penaeus_monodon_-_Ratnagiri.jpg' },
+  { name: 'Pomfret', category: 'Sea Fish', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Pampus_argenteus.jpg/320px-Pampus_argenteus.jpg' },
+  { name: 'Surmai (King Fish)', category: 'Sea Fish', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Scomberomorus_commerson.jpg/320px-Scomberomorus_commerson.jpg' },
+  { name: 'Bangda (Mackerel)', category: 'Sea Fish', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Rastrelliger_kanagurta.jpg/320px-Rastrelliger_kanagurta.jpg' },
+  { name: 'Rahu', category: 'Fresh Water', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Labeo_rohita.jpg/320px-Labeo_rohita.jpg' },
+  { name: 'Katla', category: 'Fresh Water', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Catla_catla.jpg/320px-Catla_catla.jpg' },
+  { name: 'Pangaasiuss', category: 'Fresh Water', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Pangasianodon_hypophthalmus.jpg/320px-Pangasianodon_hypophthalmus.jpg' },
+  { name: 'Squids', category: 'Seafood', emoji: '🦑', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Loligo_vulgaris.jpg/320px-Loligo_vulgaris.jpg' },
+  { name: 'Mud Crabs', category: 'Seafood', emoji: '🦀', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Scylla_serrata.jpg/320px-Scylla_serrata.jpg' },
+  { name: 'Indian Salmon Fish', category: 'Sea Fish', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Eleutheronema_tetradactylum.jpg/320px-Eleutheronema_tetradactylum.jpg' },
+  { name: 'Red Snapper', category: 'Sea Fish', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Red_snapper.jpg/320px-Red_snapper.jpg' },
+  { name: 'Bombil (Bombay Duck)', category: 'Sea Fish', emoji: '🐟', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Harpadon_nehereus.jpg/320px-Harpadon_nehereus.jpg' },
+];
+
+const ProductCard = ({ fish, delay }) => {
+  const waMsg = encodeURIComponent(`Hi Godawari Fish & Company 🐟\nI want to order:\n*${fish.name}*\nPlease confirm price and availability.`);
+  
+  return (
+    <ScrollReveal delay={delay} className="group relative overflow-hidden rounded-2xl shadow-lg bg-white glow-card pop-hover">
+      <div className="relative h-56 overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50">
+        <img
+          src={fish.image} alt={fish.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        <div className="absolute top-3 right-3">
+          <span className={`px-3 py-1 rounded-full text-xs font-bold bg-white/90 text-green-700`}>{fish.category}</span>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <h3 className="text-xl font-bold text-white mb-1">{fish.emoji} {fish.name}</h3>
+        </div>
+      </div>
+      <div className="p-4">
+        <a
+          href={`https://wa.me/919371306189?text=${waMsg}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-2.5 rounded-xl font-semibold transition transform hover:scale-105 btn-glow ripple shake"
+        >
+          <MessageCircle size={16} /> Order Now
+        </a>
+      </div>
+    </ScrollReveal>
   );
 };
 
@@ -93,6 +138,10 @@ const HomePage = () => {
     }
   ];
 
+  const seaFish = FISH_CATALOGUE.filter(f => f.category === 'Sea Fish').slice(0, 4);
+  const freshWaterFish = FISH_CATALOGUE.filter(f => f.category === 'Fresh Water').slice(0, 4);
+  const seafood = FISH_CATALOGUE.filter(f => f.category === 'Seafood').slice(0, 4);
+
   return (
     <div className="min-h-screen bg-white">
       {!splashDone && <SplashScreen onDone={handleSplashDone} />}
@@ -109,23 +158,9 @@ const HomePage = () => {
           <source src="https://media.istockphoto.com/id/802980672/video/famous-restaurant-chef-seasons-fish-frying-on-a-pan.mp4?s=mp4-640x640-is&k=20&c=guJryjccrk8jh8C_y3BJ2x7Kk2reQFD6lQpfzwC48l8=" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-        
-        <div className="absolute inset-0 flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <ScrollReveal className="text-white">
-              <a
-                href="/shop"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-700 to-emerald-600 hover:from-green-800 hover:to-emerald-700 px-6 py-3 rounded-full font-semibold shadow-2xl transition-all transform hover:scale-105 animate-pulse-glow"
-              >
-                View Products
-                <ArrowRight size={18} />
-              </a>
-            </ScrollReveal>
-          </div>
-        </div>
       </section>
 
-      {/* About Section - Similar to reference */}
+      {/* About Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -173,7 +208,7 @@ const HomePage = () => {
             
             <ScrollReveal delay={200}>
               <img
-                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=900&fit=crop"
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=700&fit=crop"
                 alt="About Us"
                 className="rounded-2xl shadow-2xl w-full h-auto glow-card"
               />
@@ -182,15 +217,93 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Products Range - Similar to reference */}
+      {/* Featured Products - Sea Fish */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-              Products Range
+              🌊 Premium Sea Fish
             </h2>
             <p className="text-gray-600 text-lg">
-              Discover our diverse selection of premium fresh and frozen fish products sourced from trusted suppliers and delivered with assured quality.
+              Fresh from the ocean, delivered daily!
+            </p>
+          </ScrollReveal>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {seaFish.map((fish, index) => (
+              <ProductCard key={fish.name} fish={fish} delay={index * 100} />
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a href="/shop" className="inline-flex items-center gap-2 text-green-700 font-semibold text-lg hover:text-green-800 transition">
+              View All Sea Fish <ArrowRight size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products - Fresh Water Fish */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+              🏞️ Fresh Water Fish
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Healthy and tasty, straight from the rivers!
+            </p>
+          </ScrollReveal>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {freshWaterFish.map((fish, index) => (
+              <ProductCard key={fish.name} fish={fish} delay={index * 100} />
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a href="/shop" className="inline-flex items-center gap-2 text-green-700 font-semibold text-lg hover:text-green-800 transition">
+              View All Fresh Water Fish <ArrowRight size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products - Seafood */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+              🦐 Premium Seafood
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Prawns, crabs, squids and more!
+            </p>
+          </ScrollReveal>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {seafood.map((fish, index) => (
+              <ProductCard key={fish.name} fish={fish} delay={index * 100} />
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <a href="/shop" className="inline-flex items-center gap-2 text-green-700 font-semibold text-lg hover:text-green-800 transition">
+              View All Seafood <ArrowRight size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Categories */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+              Our Complete Product Range
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Explore all our fresh and frozen fish products with guaranteed quality!
             </p>
           </ScrollReveal>
           
@@ -208,7 +321,7 @@ const HomePage = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
@@ -251,13 +364,13 @@ const HomePage = () => {
                 href="https://wa.me/919371306189"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-glow ripple shake pop-hover bg-green-500 hover:bg-green-600 text-white px-8 py-3.5 rounded-full font-semibold transition transform hover:scale-110 shadow-xl"
+                className="btn-glow ripple shake pop-hover bg-green-500 hover:bg-green-600 text-white px-8 py-3.5 rounded-full font-semibold transition transform hover:scale-105 shadow-xl"
               >
                 💬 Chat on WhatsApp
               </a>
               <a
                 href="tel:9371306189"
-                className="btn-glow ripple shake pop-hover bg-white hover:bg-gray-100 text-green-600 px-8 py-3.5 rounded-full font-semibold transition transform hover:scale-110 shadow-xl"
+                className="btn-glow ripple shake pop-hover bg-white hover:bg-gray-100 text-green-600 px-8 py-3.5 rounded-full font-semibold transition transform hover:scale-105 shadow-xl"
               >
                 📞 Call 9371306189
               </a>

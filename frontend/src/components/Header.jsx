@@ -22,10 +22,10 @@ const Header = ({ isAdminPage = false }) => {
 
   return (
     <header
-      className={`sticky top-0 z-50 text-white transition-all duration-500 animate-gradient ${
+      className={`sticky top-0 z-50 text-white transition-all duration-500 ${
         scrolled
-          ? 'bg-gradient-to-r from-green-700/95 to-green-900/95 backdrop-blur-md shadow-2xl'
-          : 'bg-gradient-to-r from-green-600 to-green-800 shadow-lg'
+          ? 'bg-gradient-to-r from-green-700/95 to-green-900/95 backdrop-blur-md shadow-2xl animate-gradient'
+          : 'bg-transparent shadow-none'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
