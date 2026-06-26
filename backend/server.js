@@ -173,7 +173,7 @@ app.post('/api/products/import-all', verifyToken, (req, res) => {
     { name: 'Mud Crabs', description: 'Fresh mud crabs with rich, sweet meat.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mud%20crabs%20seafood&image_size=square' },
     { name: 'Sea Crabs', description: 'Fresh sea crabs. Perfect for crab masala.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sea%20crabs%20seafood&image_size=square' },
     { name: 'Oyster / Sneal', description: 'Fresh oysters, great for pan fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20oysters%20seafood&image_size=square' },
-    { name: 'Rahu', description: 'Most popular fresh water fish. Excellent for curries.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Rohu%20rahu%20freshwater%20fish&image_size=square' },
+    { name: 'Rahu', description: 'Most popular fresh water fish. Excellent for curries.', image: 'https://raw.githubusercontent.com/prem9621/godavari-fish/main/frontend/public/images/red-se-fish.jpeg' },
     { name: 'Katla', description: 'Large fresh water fish with tender flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Katla%20freshwater%20fish&image_size=square' },
     { name: 'River Surmai', description: 'Fresh water king fish. Rich flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=River%20surmai%20freshwater%20fish&image_size=square' },
     { name: 'Pangaasiuss', description: 'Basa fish with mild white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Basa%20pangasius%20fish&image_size=square' },
