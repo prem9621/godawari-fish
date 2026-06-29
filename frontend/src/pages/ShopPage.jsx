@@ -4,82 +4,101 @@ import { api, resolveImageUrl } from '../utils/api';
 import ScrollReveal from '../components/ScrollReveal';
 import BubbleBackground from '../components/BubbleBackground';
 
-const DEFAULT_IMAGES = {
-  'Prawn':                'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Penaeus_monodon_-_Ratnagiri.jpg/320px-Penaeus_monodon_-_Ratnagiri.jpg',
-  'King Prawn':           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Penaeus_monodon_-_Ratnagiri.jpg/320px-Penaeus_monodon_-_Ratnagiri.jpg',
-  'Tiny Prawn':           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Penaeus_monodon_-_Ratnagiri.jpg/320px-Penaeus_monodon_-_Ratnagiri.jpg',
-  'Pomfret':              'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Pampus_argenteus.jpg/320px-Pampus_argenteus.jpg',
-  'Chand Paplet':         'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Pampus_argenteus.jpg/320px-Pampus_argenteus.jpg',
-  'Halwa (Black Pomfret)':'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Parastromateus_niger.jpg/320px-Parastromateus_niger.jpg',
-  'Surmai (King Fish)':   'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Scomberomorus_commerson.jpg/320px-Scomberomorus_commerson.jpg',
-  'River Surmai':         'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Scomberomorus_commerson.jpg/320px-Scomberomorus_commerson.jpg',
-  'Bangda (Mackerel)':    'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Rastrelliger_kanagurta.jpg/320px-Rastrelliger_kanagurta.jpg',
-  'Rahu':                 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Labeo_rohita.jpg/320px-Labeo_rohita.jpg',
-  'Katla':                'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Catla_catla.jpg/320px-Catla_catla.jpg',
-  'Squids':               'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Loligo_vulgaris.jpg/320px-Loligo_vulgaris.jpg',
-  'Mud Crabs':            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Scylla_serrata.jpg/320px-Scylla_serrata.jpg',
-  'Sea Crabs':            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Scylla_serrata.jpg/320px-Scylla_serrata.jpg',
-  'Bombil (Bombay Duck)': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Harpadon_nehereus.jpg/320px-Harpadon_nehereus.jpg',
-  'Red Snapper':          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Red_snapper.jpg/320px-Red_snapper.jpg',
-  'Indian Salmon Fish':   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Eleutheronema_tetradactylum.jpg/320px-Eleutheronema_tetradactylum.jpg',
-  'Kolkata Ilish Fish':   'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Tenualosa_ilisha.jpg/320px-Tenualosa_ilisha.jpg',
-  'Oyster / Sneal':       'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Oysters_-_3.jpg/320px-Oysters_-_3.jpg',
-  'Pangaasiuss':          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Pangasianodon_hypophthalmus.jpg/320px-Pangasianodon_hypophthalmus.jpg',
-  'Hamoor Fish':          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Epinephelus_coioides.jpg/320px-Epinephelus_coioides.jpg',
-  'Kuppa Fish (Tuna)':    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Yellowfin_tuna_nurp.jpg/320px-Yellowfin_tuna_nurp.jpg',
+const FISH_IMAGES = {
+  'Prawn': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20prawns%20seafood%20display&image_size=square',
+  'King Prawn': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Large%20king%20prawns%20seafood&image_size=square',
+  'Pomfret': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=White%20pomfret%20fish&image_size=square',
+  'Indian Salmon Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Indian%20salmon%20fish%20rawas&image_size=square',
+  'Surmai (King Fish)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Surmai%20king%20fish%20seer%20fish&image_size=square',
+  'Halwa (Black Pomfret)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20pomfret%20halwa%20fish&image_size=square',
+  'Kolkata Ilish Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hilsa%20ilish%20fish%20bengali&image_size=square',
+  'Betki Fish (Chaunak)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Betki%20chaunak%20fish&image_size=square',
+  'Hamoor Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hamoor%20grouper%20fish&image_size=square',
+  'Bangda (Mackerel)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bangda%20mackerel%20fish&image_size=square',
+  'Tarli Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tarli%20sardine%20fish&image_size=square',
+  'Kuppa Fish (Tuna)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tuna%20fish%20fresh&image_size=square',
+  'Rani Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pink%20perch%20rani%20fish&image_size=square',
+  'Bombil (Bombay Duck)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bombay%20duck%20bombil%20fish&image_size=square',
+  'Karli Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Cobia%20karli%20fish&image_size=square',
+  'Sakla (Bombay Maral)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Barracuda%20sakla%20fish&image_size=square',
+  'Singada Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Singada%20fish%20konkan&image_size=square',
+  'Toll Fish (Green Bone)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Green%20bone%20toll%20fish&image_size=square',
+  'Red Snapper': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Red%20snapper%20fish&image_size=square',
+  'Mandeli Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mandeli%20coastal%20fish&image_size=square',
+  'Kurchi Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kurchi%20coastal%20fish&image_size=square',
+  'Chand Paplet': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Silver%20pomfret%20chand%20paplet&image_size=square',
+  'Karimi Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Karimi%20fish%20konkani&image_size=square',
+  'Shark Fish (Baby Shark)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Baby%20shark%20fish&image_size=square',
+  'Baam Fish (Black Baam)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20eel%20baam%20fish&image_size=square',
+  'Pili Baam Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Yellow%20eel%20pili%20baam&image_size=square',
+  'Lep Fish (Sole Fish)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sole%20fish%20lep%20flatfish&image_size=square',
+  'Kane Fish (Lady Fish)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Lady%20fish%20kane%20tenualosa&image_size=square',
+  'Tiny Prawn': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiny%20prawns%20small%20shrimp&image_size=square',
+  'Squids': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20squids%20calamari&image_size=square',
+  'Mud Crabs': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mud%20crabs%20seafood&image_size=square',
+  'Sea Crabs': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sea%20crabs%20seafood&image_size=square',
+  'Oyster / Sneal': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20oysters%20seafood&image_size=square',
+  'Rahu': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Rohu%20rahu%20freshwater%20fish&image_size=square',
+  'Katla': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Katla%20freshwater%20fish&image_size=square',
+  'River Surmai': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=River%20surmai%20freshwater%20fish&image_size=square',
+  'Pangaasiuss': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Basa%20pangasius%20fish&image_size=square',
+  'Tilapi': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tilapia%20fish&image_size=square',
+  'Gawran Baam': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20eel%20gawran%20baam&image_size=square',
+  'Marla Fish': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Marla%20freshwater%20fish%20maharashtra&image_size=square',
+  'Tengda Fish (Kudlu Katarna)': 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20catfish%20tengda&image_size=square'
 };
 
 const getDefaultImage = (name) => {
-  if (DEFAULT_IMAGES[name]) return DEFAULT_IMAGES[name];
-  const key = Object.keys(DEFAULT_IMAGES).find(k =>
+  if (FISH_IMAGES[name]) return FISH_IMAGES[name];
+  const key = Object.keys(FISH_IMAGES).find(k =>
     name.toLowerCase().includes(k.toLowerCase().split(' ')[0]) ||
     k.toLowerCase().includes(name.toLowerCase().split(' ')[0])
   );
-  return key ? DEFAULT_IMAGES[key] : null;
+  return key ? FISH_IMAGES[key] : null;
 };
 
 const FISH_CATALOGUE = [
-  { name: 'Prawn', category: 'Sea Fish', emoji: '🦐', benefits: 'High protein, low fat, rich in selenium and iodine.', description: 'Fresh prawns, perfect for frying, curries and biryani.' },
-  { name: 'King Prawn', category: 'Sea Fish', emoji: '🦐', benefits: 'Excellent source of lean protein and zinc.', description: 'Large juicy king prawns. Ideal for grilling, tandoor and special occasions.' },
-  { name: 'Pomfret', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in omega-3, vitamin D and calcium.', description: 'Premium white pomfret, perfect for frying and steaming.' },
-  { name: 'Indian Salmon Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'High in omega-3 fatty acids, good for heart health.', description: 'Tasty and nutritious Indian salmon. Great for curries and fry.' },
-  { name: 'Surmai (King Fish)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, omega-3, vitamin B12.', description: 'Premium surmai, great for curries, steaks and fry.' },
-  { name: 'Halwa (Black Pomfret)', category: 'Sea Fish', emoji: '🐟', benefits: 'Good source of protein, low cholesterol.', description: 'Black pomfret with rich flavor. Excellent for deep fry.' },
-  { name: 'Kolkata Ilish Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Very rich in omega-3, great for brain health.', description: 'Famous Hilsa fish from Kolkata. A delicacy with unique flavor.' },
-  { name: 'Betki Fish (Chaunak)', category: 'Sea Fish', emoji: '🐟', benefits: 'Low fat, high protein, good for weight management.', description: 'Firm white flesh, ideal for koliwada fry.' },
-  { name: 'Hamoor Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Excellent protein source, low saturated fat.', description: 'Premium grouper fish. Thick juicy flesh for grilling.' },
-  { name: 'Bangda (Mackerel)', category: 'Sea Fish', emoji: '🐟', benefits: 'Very high omega-3, selenium, vitamin B12.', description: 'Fresh bangda for rava fry and curry.' },
-  { name: 'Tarli Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in calcium, omega-3 and vitamin D.', description: 'Small sardine-style fish, great for frying.' },
-  { name: 'Kuppa Fish (Tuna)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, low fat, rich in iron.', description: 'Fresh tuna fish, meaty and flavourful.' },
-  { name: 'Rani Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good protein, low calories, easy to digest.', description: 'Pink perch with tender flesh. Perfect for frying.' },
-  { name: 'Bombil (Bombay Duck)', category: 'Sea Fish', emoji: '🐟', benefits: 'Low calorie, high protein, good for metabolism.', description: 'Iconic Bombay duck fish. Best for sun-dried or fried preparations.' },
-  { name: 'Karli Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in omega-3 and protein.', description: 'Cobia fish with firm flesh. Excellent for grilling.' },
-  { name: 'Sakla (Bombay Maral)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, good for muscle building.', description: 'Barracuda fish, firm and tasty.' },
-  { name: 'Singada Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good source of minerals and protein.', description: 'Popular in Konkan coastal cuisine.' },
-  { name: 'Toll Fish (Green Bone)', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in calcium and phosphorus.', description: 'Distinctive green bones, sweet white flesh.' },
-  { name: 'Red Snapper', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, omega-3, potassium.', description: 'Premium red snapper with firm white flesh.' },
-  { name: 'Mandeli Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in calcium and good fats.', description: 'Small coastal fish, great for frying.' },
-  { name: 'Kurchi Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good protein and mineral content.', description: 'Tasty coastal fish with unique flavour.' },
-  { name: 'Chand Paplet', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in omega-3, vitamin D, calcium.', description: 'Silver pomfret, the most premium pomfret variety.' },
-  { name: 'Karimi Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good source of protein and healthy fats.', description: 'Perfect for Konkani style masala fry.' },
-  { name: 'Shark Fish (Baby Shark)', category: 'Sea Fish', emoji: '🦈', benefits: 'Very high protein, low fat.', description: 'Tender baby shark meat. Rich flavour.' },
-  { name: 'Baam Fish (Black Baam)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, omega-3, vitamin A.', description: 'Black eel fish with rich, hearty flavour.' },
-  { name: 'Pili Baam Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in vitamins and minerals.', description: 'Yellow eel with distinctive taste.' },
-  { name: 'Lep Fish (Sole Fish)', category: 'Sea Fish', emoji: '🐟', benefits: 'Low calorie, high protein, easy to digest.', description: 'Flat sole fish with delicate white flesh.' },
-  { name: 'Kane Fish (Lady Fish)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, good omega-3 content.', description: 'Slender lady fish with sweet flesh.' },
-  { name: 'Tiny Prawn', category: 'Seafood', emoji: '🦐', benefits: 'High protein, iodine and selenium.', description: 'Small fresh prawns, ideal for prawn masala.' },
-  { name: 'Squids', category: 'Seafood', emoji: '🦑', benefits: 'Low calorie, high protein, rich in copper.', description: 'Fresh squids, tender quality.' },
-  { name: 'Mud Crabs', category: 'Seafood', emoji: '🦀', benefits: 'High protein, omega-3, zinc.', description: 'Fresh mud crabs with rich, sweet meat.' },
-  { name: 'Sea Crabs', category: 'Seafood', emoji: '🦀', benefits: 'Rich in protein, minerals and B12.', description: 'Fresh sea crabs. Perfect for crab masala.' },
-  { name: 'Oyster / Sneal', category: 'Seafood', emoji: '🦪', benefits: 'Very high zinc, iron and vitamin B12.', description: 'Fresh oysters, great for pan fry.' },
-  { name: 'Rahu', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, omega-3, good for digestion.', description: 'Most popular fresh water fish. Excellent for curries.' },
-  { name: 'Katla', category: 'Fresh Water', emoji: '🐟', benefits: 'Rich in protein, omega-3, vitamins A and C.', description: 'Large fresh water fish with tender flesh.' },
-  { name: 'River Surmai', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, omega-3 and minerals.', description: 'Fresh water king fish. Rich flavour.' },
-  { name: 'Pangaasiuss', category: 'Fresh Water', emoji: '🐟', benefits: 'Low fat, high protein, good for weight loss.', description: 'Basa fish with mild white flesh.' },
-  { name: 'Tilapi', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, low calories, selenium.', description: 'Mild and versatile fish. Easy to cook.' },
-  { name: 'Gawran Baam', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein and iron content.', description: 'Local fresh water eel. Rich and hearty.' },
-  { name: 'Marla Fish', category: 'Fresh Water', emoji: '🐟', benefits: 'Good protein, local nutritional benefits.', description: 'Fresh water fish popular in Maharashtra.' },
-  { name: 'Tengda Fish (Kudlu Katarna)', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, good for immunity.', description: 'Small fresh water catfish. Very tasty.' },
+  { name: 'Prawn', category: 'Sea Fish', emoji: '🦐', benefits: 'High protein, low fat, rich in selenium and iodine.', description: 'Fresh prawns, perfect for frying, curries and biryani.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20prawns%20seafood%20display&image_size=square' },
+  { name: 'King Prawn', category: 'Sea Fish', emoji: '🦐', benefits: 'Excellent source of lean protein and zinc.', description: 'Large juicy king prawns. Ideal for grilling, tandoor and special occasions.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Large%20king%20prawns%20seafood&image_size=square' },
+  { name: 'Pomfret', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in omega-3, vitamin D and calcium.', description: 'Premium white pomfret, perfect for frying and steaming.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=White%20pomfret%20fish&image_size=square' },
+  { name: 'Indian Salmon Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'High in omega-3 fatty acids, good for heart health.', description: 'Tasty and nutritious Indian salmon. Great for curries and fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Indian%20salmon%20fish%20rawas&image_size=square' },
+  { name: 'Surmai (King Fish)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, omega-3, vitamin B12.', description: 'Premium surmai, great for curries, steaks and fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Surmai%20king%20fish%20seer%20fish&image_size=square' },
+  { name: 'Halwa (Black Pomfret)', category: 'Sea Fish', emoji: '🐟', benefits: 'Good source of protein, low cholesterol.', description: 'Black pomfret with rich flavor. Excellent for deep fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20pomfret%20halwa%20fish&image_size=square' },
+  { name: 'Kolkata Ilish Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Very rich in omega-3, great for brain health.', description: 'Famous Hilsa fish from Kolkata. A delicacy with unique flavor.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hilsa%20ilish%20fish%20bengali&image_size=square' },
+  { name: 'Betki Fish (Chaunak)', category: 'Sea Fish', emoji: '🐟', benefits: 'Low fat, high protein, good for weight management.', description: 'Firm white flesh, ideal for koliwada fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Betki%20chaunak%20fish&image_size=square' },
+  { name: 'Hamoor Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Excellent protein source, low saturated fat.', description: 'Premium grouper fish. Thick juicy flesh for grilling.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Hamoor%20grouper%20fish&image_size=square' },
+  { name: 'Bangda (Mackerel)', category: 'Sea Fish', emoji: '🐟', benefits: 'Very high omega-3, selenium, vitamin B12.', description: 'Fresh bangda for rava fry and curry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bangda%20mackerel%20fish&image_size=square' },
+  { name: 'Tarli Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in calcium, omega-3 and vitamin D.', description: 'Small sardine-style fish, great for frying.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tarli%20sardine%20fish&image_size=square' },
+  { name: 'Kuppa Fish (Tuna)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, low fat, rich in iron.', description: 'Fresh tuna fish, meaty and flavourful.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tuna%20fish%20fresh&image_size=square' },
+  { name: 'Rani Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good protein, low calories, easy to digest.', description: 'Pink perch with tender flesh. Perfect for frying.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Pink%20perch%20rani%20fish&image_size=square' },
+  { name: 'Bombil (Bombay Duck)', category: 'Sea Fish', emoji: '🐟', benefits: 'Low calorie, high protein, good for metabolism.', description: 'Iconic Bombay duck fish. Best for sun-dried or fried preparations.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Bombay%20duck%20bombil%20fish&image_size=square' },
+  { name: 'Karli Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in omega-3 and protein.', description: 'Cobia fish with firm flesh. Excellent for grilling.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Cobia%20karli%20fish&image_size=square' },
+  { name: 'Sakla (Bombay Maral)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, good for muscle building.', description: 'Barracuda fish, firm and tasty.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Barracuda%20sakla%20fish&image_size=square' },
+  { name: 'Singada Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good source of minerals and protein.', description: 'Popular in Konkan coastal cuisine.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Singada%20fish%20konkan&image_size=square' },
+  { name: 'Toll Fish (Green Bone)', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in calcium and phosphorus.', description: 'Distinctive green bones, sweet white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Green%20bone%20toll%20fish&image_size=square' },
+  { name: 'Red Snapper', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, omega-3, potassium.', description: 'Premium red snapper with firm white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Red%20snapper%20fish&image_size=square' },
+  { name: 'Mandeli Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in calcium and good fats.', description: 'Small coastal fish, great for frying.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mandeli%20coastal%20fish&image_size=square' },
+  { name: 'Kurchi Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good protein and mineral content.', description: 'Tasty coastal fish with unique flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Kurchi%20coastal%20fish&image_size=square' },
+  { name: 'Chand Paplet', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in omega-3, vitamin D, calcium.', description: 'Silver pomfret, the most premium pomfret variety.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Silver%20pomfret%20chand%20paplet&image_size=square' },
+  { name: 'Karimi Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Good source of protein and healthy fats.', description: 'Perfect for Konkani style masala fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Karimi%20fish%20konkani&image_size=square' },
+  { name: 'Shark Fish (Baby Shark)', category: 'Sea Fish', emoji: '🦈', benefits: 'Very high protein, low fat.', description: 'Tender baby shark meat. Rich flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Baby%20shark%20fish&image_size=square' },
+  { name: 'Baam Fish (Black Baam)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, omega-3, vitamin A.', description: 'Black eel fish with rich, hearty flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Black%20eel%20baam%20fish&image_size=square' },
+  { name: 'Pili Baam Fish', category: 'Sea Fish', emoji: '🐟', benefits: 'Rich in vitamins and minerals.', description: 'Yellow eel with distinctive taste.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Yellow%20eel%20pili%20baam&image_size=square' },
+  { name: 'Lep Fish (Sole Fish)', category: 'Sea Fish', emoji: '🐟', benefits: 'Low calorie, high protein, easy to digest.', description: 'Flat sole fish with delicate white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sole%20fish%20lep%20flatfish&image_size=square' },
+  { name: 'Kane Fish (Lady Fish)', category: 'Sea Fish', emoji: '🐟', benefits: 'High protein, good omega-3 content.', description: 'Slender lady fish with sweet flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Lady%20fish%20kane%20tenualosa&image_size=square' },
+  { name: 'Tiny Prawn', category: 'Seafood', emoji: '🦐', benefits: 'High protein, iodine and selenium.', description: 'Small fresh prawns, ideal for prawn masala.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tiny%20prawns%20small%20shrimp&image_size=square' },
+  { name: 'Squids', category: 'Seafood', emoji: '🦑', benefits: 'Low calorie, high protein, rich in copper.', description: 'Fresh squids, tender quality.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20squids%20calamari&image_size=square' },
+  { name: 'Mud Crabs', category: 'Seafood', emoji: '🦀', benefits: 'High protein, omega-3, zinc.', description: 'Fresh mud crabs with rich, sweet meat.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Mud%20crabs%20seafood&image_size=square' },
+  { name: 'Sea Crabs', category: 'Seafood', emoji: '🦀', benefits: 'Rich in protein, minerals and B12.', description: 'Fresh sea crabs. Perfect for crab masala.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Sea%20crabs%20seafood&image_size=square' },
+  { name: 'Oyster / Sneal', category: 'Seafood', emoji: '🦪', benefits: 'Very high zinc, iron and vitamin B12.', description: 'Fresh oysters, great for pan fry.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Fresh%20oysters%20seafood&image_size=square' },
+  { name: 'Rahu', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, omega-3, good for digestion.', description: 'Most popular fresh water fish. Excellent for curries.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Rohu%20rahu%20freshwater%20fish&image_size=square' },
+  { name: 'Katla', category: 'Fresh Water', emoji: '🐟', benefits: 'Rich in protein, omega-3, vitamins A and C.', description: 'Large fresh water fish with tender flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Katla%20freshwater%20fish&image_size=square' },
+  { name: 'River Surmai', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, omega-3 and minerals.', description: 'Fresh water king fish. Rich flavour.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=River%20surmai%20freshwater%20fish&image_size=square' },
+  { name: 'Pangaasiuss', category: 'Fresh Water', emoji: '🐟', benefits: 'Low fat, high protein, good for weight loss.', description: 'Basa fish with mild white flesh.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Basa%20pangasius%20fish&image_size=square' },
+  { name: 'Tilapi', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, low calories, selenium.', description: 'Mild and versatile fish. Easy to cook.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tilapia%20fish&image_size=square' },
+  { name: 'Gawran Baam', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein and iron content.', description: 'Local fresh water eel. Rich and hearty.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20eel%20gawran%20baam&image_size=square' },
+  { name: 'Marla Fish', category: 'Fresh Water', emoji: '🐟', benefits: 'Good protein, local nutritional benefits.', description: 'Fresh water fish popular in Maharashtra.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Marla%20freshwater%20fish%20maharashtra&image_size=square' },
+  { name: 'Tengda Fish (Kudlu Katarna)', category: 'Fresh Water', emoji: '🐟', benefits: 'High protein, good for immunity.', description: 'Small fresh water catfish. Very tasty.', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Freshwater%20catfish%20tengda&image_size=square' }
 ];
 
 const WEIGHT_OPTIONS = ['500g', '1 kg', '2 kg', '5 kg'];
@@ -100,7 +119,7 @@ const FishCard = ({ product }) => {
   const info = getCatalogueInfo(product.name);
   const hasRate = product.rate && Number(product.rate) > 0;
   const isAvailable = !product.availability || product.availability === 'Available';
-  const imageUrl = (!imgError && resolveImageUrl(product.image_url)) || getDefaultImage(product.name);
+  const imageUrl = (!imgError && resolveImageUrl(product.image_url || product.image)) || getDefaultImage(product.name);
   const waMsg = encodeURIComponent(`Hi Godawari Fish & Company 🐟\nI want to order:\n*${product.name}*\nWeight: ${selectedWeight}${hasRate ? `\nRate: ₹${product.rate}/${product.unit || 'kg'}` : ''}\nPlease confirm availability.`);
 
   return (
@@ -166,7 +185,7 @@ const FishCard = ({ product }) => {
 const StaticFishCard = ({ fish }) => {
   const [selectedWeight, setSelectedWeight] = useState('1 kg');
   const [imgError, setImgError] = useState(false);
-  const imageUrl = !imgError ? getDefaultImage(fish.name) : null;
+  const imageUrl = !imgError ? (fish.image || getDefaultImage(fish.name)) : null;
   const waMsg = encodeURIComponent(`Hi Godawari Fish & Company 🐟\nI want to order:\n*${fish.name}*\nWeight: ${selectedWeight}\nPlease confirm price and availability.`);
 
   return (
@@ -240,19 +259,43 @@ const ShopPage = () => {
     }
   };
 
-  useEffect(() => { fetchProducts(); document.title = 'Shop – Fresh Fish | Godawari Fish & Company'; }, []);
+  useEffect(() => { fetchProducts(); document.title = 'Shop — Fresh Fish | Godawari Fish & Company'; }, []);
 
-  const dbNames = dbProducts.map(p => p.name.toLowerCase());
-  const staticOnly = FISH_CATALOGUE.filter(f => !dbNames.some(n => n.includes(f.name.toLowerCase().split(' ')[0]) || f.name.toLowerCase().includes(n.split(' ')[0])));
+  // Create a map of database products by name for quick lookup
+  const dbProductMap = new Map();
+  dbProducts.forEach(p => {
+    dbProductMap.set(p.name.toLowerCase(), p);
+  });
+
+  // Merge FISH_CATALOGUE with database data
+  const mergedProducts = FISH_CATALOGUE.map(fish => {
+    const dbProduct = dbProductMap.get(fish.name.toLowerCase());
+    if (dbProduct) {
+      return {
+        ...fish,
+        ...dbProduct,
+        image_url: dbProduct.image_url || fish.image
+      };
+    }
+    return {
+      ...fish,
+      product_id: null,
+      rate: null,
+      unit: 'kg',
+      availability: 'Available',
+      weight: null,
+      weight_unit: 'kg'
+    };
+  });
+
   const categories = ['All', 'Sea Fish', 'Seafood', 'Fresh Water'];
   const filterFn = (name, cat) => {
     const info = getCatalogueInfo(name);
     const matchCat = activeCategory === 'All' || info.category === activeCategory || cat === activeCategory;
     return matchCat && name.toLowerCase().includes(search.toLowerCase());
   };
-  const filteredDb = dbProducts.filter(p => filterFn(p.name, ''));
-  const filteredStatic = staticOnly.filter(f => filterFn(f.name, f.category));
-  const totalCount = filteredDb.length + filteredStatic.length;
+  const filteredProducts = mergedProducts.filter(p => filterFn(p.name, p.category));
+  const totalCount = filteredProducts.length;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -309,27 +352,15 @@ const ShopPage = () => {
               <p>No fish found for "{search}"</p>
             </div>
           ) : (
-            <>
-              {filteredDb.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-8">
-                  {filteredDb.map(p => <FishCard key={p.product_id || p.name} product={p} />)}
-                </div>
-              )}
-              {filteredStatic.length > 0 && (
-                <>
-                  {filteredDb.length > 0 && (
-                    <div className="flex items-center gap-3 my-6">
-                      <div className="flex-1 h-px bg-gray-200" />
-                      <span className="text-xs text-gray-400 font-semibold whitespace-nowrap">More Available Fish</span>
-                      <div className="flex-1 h-px bg-gray-200" />
-                    </div>
-                  )}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                    {filteredStatic.map(f => <StaticFishCard key={f.name} fish={f} />)}
-                  </div>
-                </>
-              )}
-            </>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {filteredProducts.map(p => (
+                p.product_id ? (
+                  <FishCard key={p.product_id || p.name} product={p} />
+                ) : (
+                  <StaticFishCard key={p.name} fish={p} />
+                )
+              ))}
+            </div>
           )}
 
           <div className="mt-14 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-8 text-white text-center shadow-xl">
