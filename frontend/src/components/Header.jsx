@@ -22,7 +22,11 @@ const Header = ({ isAdminPage = false }) => {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 text-white transition-all duration-500 bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 text-white transition-all duration-300 ${
+        scrolled 
+          ? 'bg-gradient-to-r from-green-600 to-green-800 shadow-lg' 
+          : 'bg-transparent'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
